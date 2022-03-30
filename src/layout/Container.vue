@@ -12,7 +12,7 @@ const scroll = (info) => {
 <template>
     <q-page-container>
         <q-page class="q-pa-md row inset-shadow">
-            <div class="col-12 shadow-up-3 q-pa-sm">
+            <div class="col-12 shadow-3 q-pa-sm">
                 <div class="column full-height">
                     <q-scroll-area class="col" @scroll="scroll">
                         <router-view v-slot="{ Component }">

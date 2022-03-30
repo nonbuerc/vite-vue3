@@ -15,10 +15,11 @@ import 'quasar/src/css/index.sass'
 import '@quasar/extras/animate/fadeInLeft.css'
 // import '@quasar/extras/animate/fadeOutRight.css'
 
-export default (app) =>
+export default (app) => {
     app.use(Quasar, {
         plugins: {
             /*Notify, LoadingBar, Dark*/
         },
         lang: lang
     })
+}

@@ -14,22 +14,23 @@ export default defineConfig({
             sassVariables: 'src/assets/css/var.sass'
         })
     ],
+
+    server: {
+        https: false,
+        port: 3690
+        // proxy: {
+        //     '/api': {
+        //         target: 'http://localhost:64368',
+        //         changeOrigin: true,
+        //         secure: false,
+        //         rewrite: (path) => path.replace(/^\/api/, '')
+        //     }
+        // }
+    },
     resolve: {
         alias: {
-            '~': resolve(__dirname, 'src')
+            '@': resolve(__dirname, 'src')
         }
     },
-    // server: {
-    //     https: false,
-    //     port: 3690,
-    //     proxy: {
-    //         '/api': {
-    //             target: '',
-    //             changeOrigin: true,
-    //             secure: false,
-    //             rewrite: (path) => path.replace(/^\/api/, '')
-    //         }
-    //     }
-    // },
     build: {}
 })
