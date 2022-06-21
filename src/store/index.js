@@ -4,18 +4,23 @@ import { defineStore } from 'pinia'
 // the first argument is a unique id of the store across your application
 export const defStore = defineStore('def', {
   // other options...
-  state: () => {
-    return {
-      isShowSetting: false
+  state: () => ({
+    config: {
+      theme: 'light',
+      primary: '#55b5ad',
+      drawer: true,
+      drawerRight: false,
+      isReveal: true,
+      headerInset: true,
+      navMenus: true,
+      breadcrumbs: true
     }
-  },
-  getters: {
-    // isShowSetting: (state) => state.isShowSetting
-  },
+  }),
+  getters: {},
   actions: {
-    changeSetting(data) {
-      console.log(data)
-      this.isShowSetting = data
-    }
+    // changeSetting(data) {
+    //   console.log(data)
+    //   this.isShowSetting = data
+    // }
   }
 })

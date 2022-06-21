@@ -1,15 +1,18 @@
 <script setup>
 import { ref } from 'vue'
 
+import { defStore } from '../store/index'
+
 const act = ref(-999)
 const navMenus = ref(10)
-const sel = (i) => {
+
+const change = (i) => {
   act.value = i
 }
 </script>
 
 <template>
-  <q-toolbar class="inset-shadow">
+  <q-toolbar class="inset-shadow" v-if="defStore().config.navMenus">
     <q-tabs
       v-model="act"
       align="left"
@@ -28,7 +31,7 @@ const sel = (i) => {
           :color="act === -999 ? 'primary' : ''"
           :text-color="act !== -999 ? 'primary' : ''"
           :label="`首页`"
-          @click="sel(-999)"
+          @click="change(-999)"
         >
         </q-btn>
         <q-btn
@@ -46,7 +49,7 @@ const sel = (i) => {
           :color="act === i ? 'primary' : ''"
           :text-color="act !== i ? 'primary' : ''"
           :label="`菜单${v}`"
-          @click="sel(i)"
+          @click="change(i)"
         >
         </q-btn>
         <q-btn
@@ -64,13 +67,6 @@ const sel = (i) => {
     <q-space />
     <q-btn flat round dense icon="more_vert" />
   </q-toolbar>
-  <q-breadcrumbs class="inset-shadow q-px-md q-py-xs">
-    <!-- shadow-3 -->
-    <q-breadcrumbs-el icon="home" to="/" />
-    <q-breadcrumbs-el label="Docs" icon="widgets" to="/" />
-    <q-breadcrumbs-el label="Breadcrumbs" icon="navigation" to="/" />
-    <q-breadcrumbs-el label="Build" />
-  </q-breadcrumbs>
 </template>
 
 <style lang="scss" scoped></style>

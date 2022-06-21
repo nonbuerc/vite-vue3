@@ -1,46 +1,39 @@
 <script setup>
-import { NavMenus } from './index'
+import { NavMenus, Breadcrumbs } from './index'
 
-const emit = defineEmits(['scroll'])
-const scroll = (info) => {
-  if (info.verticalPosition > 500) {
-    emit('scroll', false)
-  } else {
-    emit('scroll', true)
-  }
-}
+import { defStore } from '../store/index'
 </script>
 <template>
   <q-page-container>
-    <q-page class="row q-pa-sm inset-shadow">
+    <q-page class="row inset-shadow q-px-sm q-pt-sm">
       <div class="col-12">
-        <div class="column full-height inset-shadow q-pa-sm">
+        <div class="column full-height q-pa-sm inset-shadow">
           <NavMenus />
-          <q-scroll-area class="col q-pa-sm inset-shadow" @scroll="scroll">
-            <router-view v-slot="{ Component }">
-              <transition appear enter-active-class="animated fadeInLeft">
-                <keep-alive>
-                  <component :is="Component" />
-                </keep-alive>
-              </transition>
-            </router-view>
-            <!-- <div class="full-height">
-              <router-view />
-            </div> -->
+          <Breadcrumbs />
+          <q-scroll-area
+            class="col full-height inset-shadow q-px-sm"
+            :content-style="{ height: '100%' }"
+            @scroll="
+              (info) =>
+                defStore().$patch(
+                  (state) => (state.config.isReveal = info.verticalPosition > 500 ? false : true)
+                )
+            "
+          >
+            <div class="fit">
+              <q-spinner-bars color="primary" size="xl" class="absolute-center" v-if="false" />
+              <router-view v-slot="{ Component }">
+                <transition appear enter-active-class="animated fadeInLeft">
+                  <keep-alive>
+                    <component :is="Component" />
+                  </keep-alive>
+                </transition>
+              </router-view>
+            </div>
           </q-scroll-area>
         </div>
       </div>
     </q-page>
-
-    <!-- <q-page class="q-pa-md content">
-            <div class="shadow-1">
-                <router-view v-slot="{ Component }">
-                    <transition appear enter-active-class="animated fadeInLeft">
-                        <component :is="Component" />
-                    </transition>
-                </router-view>
-            </div>
-        </q-page> -->
   </q-page-container>
 </template>
 <style lang="sass" scoped></style>
