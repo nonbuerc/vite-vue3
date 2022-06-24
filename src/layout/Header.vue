@@ -24,6 +24,7 @@ import { defStore } from '../store/index'
         <q-btn round>
           <q-avatar>
             <q-img src="https://cdn.quasar.dev/img/avatar.png" />
+            <!-- <q-img src="../assets/abc.jpg" /> -->
           </q-avatar>
         </q-btn>
         <q-btn

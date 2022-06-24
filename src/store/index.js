@@ -6,6 +6,7 @@ export const defStore = defineStore('def', {
   // other options...
   state: () => ({
     config: {
+      view: 'lhr lpr lfr',
       theme: 'light',
       primary: '#55b5ad',
       drawer: true,

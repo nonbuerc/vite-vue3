@@ -1,15 +1,31 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import Slots from '../components/Slots.vue'
 const curIdx = ref(0)
 const show = ref(false)
+
 const next = () => {
   curIdx.value++
 }
+
+const arr = reactive([1, 2, 3, 4, 5])
+const a = () => {
+  let num = 4 - parseInt(arr.length % 4)
+  // console.log(num)
+
+  for (let i = 0; i < num; i++) {
+    arr.push(0)
+  }
+}
+a()
+// console.log(arr)
+
+const num = 5
 </script>
 <template>
   <div class="full-height text-primary">
     Home
+    <div>{{ num }}------{{ 4 - parseInt(num % 4) }}</div>
     <Slots>
       <template #cc2>我是插槽2</template>
 
@@ -32,7 +48,6 @@ const next = () => {
 
 <style lang="sass" scoped>
 .home
-
     .abc div
         width: 100px
         height: 100px

@@ -5,7 +5,7 @@ import { defStore } from '../store/index'
 </script>
 
 <template>
-  <q-layout view="lHr LpR lFr" style="height: 100vh; overflow: hidden">
+  <q-layout :view="defStore().config.view" style="height: 100vh; overflow: hidden">
     <Header></Header>
     <q-drawer
       class="inset-shadow q-pa-sm"
@@ -20,7 +20,7 @@ import { defStore } from '../store/index'
     <q-drawer
       side="right"
       v-model="defStore().config.drawerRight"
-      :width="230"
+      :width="330"
       :breakpoint="500"
       behavior="desktop"
       class="inset-shadow q-pa-sm"
