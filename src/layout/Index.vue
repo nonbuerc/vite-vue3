@@ -8,6 +8,7 @@ import { defStore } from '../store/index'
   <q-layout :view="defStore().config.view" style="height: 100vh; overflow: hidden">
     <Header></Header>
     <q-drawer
+      :side="defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawer"
       :width="260"
@@ -18,7 +19,7 @@ import { defStore } from '../store/index'
       </q-scroll-area>
     </q-drawer>
     <q-drawer
-      side="right"
+      :side="!defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       v-model="defStore().config.drawerRight"
       :width="330"
       :breakpoint="500"

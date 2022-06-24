@@ -189,6 +189,14 @@ watch(
     <q-separator spaced inset />
 
     <q-item>
+      <q-item-section class="text-primary">SwapMenuAndSetting</q-item-section>
+      <q-item-section avatar>
+        <q-toggle v-model="defStore().config.swapMenuAndSetting" />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset />
+
+    <q-item>
       <q-item-section class="text-primary"> 主题 </q-item-section>
       <q-item-section avatar>
         <q-btn-toggle
@@ -199,18 +207,6 @@ watch(
             { label: '黑', value: 'dark' }
           ]"
         />
-      </q-item-section>
-    </q-item>
-    <q-separator spaced inset />
-
-    <q-item>
-      <q-item-section class="text-primary">主题色</q-item-section>
-      <q-item-section avatar>
-        <q-btn round push color="primary">
-          <q-popup-proxy transition-show="scale" transition-hide="scale">
-            <q-color v-model="defStore().config.primary" />
-          </q-popup-proxy>
-        </q-btn>
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
@@ -235,6 +231,14 @@ watch(
       <q-item-section class="text-primary">Breadcrumbs</q-item-section>
       <q-item-section avatar>
         <q-toggle v-model="defStore().config.breadcrumbs" />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset />
+
+    <q-item>
+      <q-item-section class="text-primary">ShowLeftMenus</q-item-section>
+      <q-item-section avatar>
+        <q-toggle v-model="defStore().config.drawer" />
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
