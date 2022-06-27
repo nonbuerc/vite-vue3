@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive, watch, computed } from 'vue'
+
 import { useQuasar, setCssVar } from 'quasar'
 
 import { defStore } from '../store/index'
@@ -91,11 +92,17 @@ const options = reactive([
     }
   ]
 ])
+//布局
 const view = computed(() => {
-  console.log(typeof groups.join('').replace(/(.{3})/g, '$1 '))
-  console.log(groups.join('').replace(/(.{3})/g, '$1 '))
-  return groups.join('').replace(/(.{3})/g, ' ')
+  return groups.join('').replace(/(.{3})/g, '$1 ')
 })
+watch(
+  () => view.value,
+  () => {
+    console.log(view.value)
+    defStore().$patch((state) => (state.config.view = view.value))
+  }
+)
 const bgColor = computed(() => {
   return (v, flag) => {
     let bgColor = 'transparent'
@@ -131,14 +138,6 @@ const bgColor = computed(() => {
     }
   }
 })
-
-watch(
-  () => view.value,
-  () => {
-    console.log(view.value)
-    defStore().$patch((state) => (state.config.view = view.value))
-  }
-)
 
 //主题
 watch(
@@ -203,8 +202,8 @@ watch(
           v-model="defStore().config.theme"
           glossy
           :options="[
-            { label: '白', value: 'light' },
-            { label: '黑', value: 'dark' }
+            { label: '明亮', value: 'light' },
+            { label: '黑暗', value: 'dark' }
           ]"
         />
       </q-item-section>
@@ -239,6 +238,14 @@ watch(
       <q-item-section class="text-primary">ShowLeftMenus</q-item-section>
       <q-item-section avatar>
         <q-toggle v-model="defStore().config.drawer" />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset />
+
+    <q-item>
+      <q-item-section class="text-primary">Footer</q-item-section>
+      <q-item-section avatar>
+        <q-toggle v-model="defStore().config.footer" />
       </q-item-section>
     </q-item>
     <q-separator spaced inset />

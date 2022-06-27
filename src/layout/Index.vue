@@ -31,7 +31,7 @@ import { defStore } from '../store/index'
       </q-scroll-area>
     </q-drawer>
     <Container />
-    <q-footer>
+    <q-footer v-if="defStore().config.footer">
       <q-toolbar>
         <q-toolbar-title>Footer</q-toolbar-title>
       </q-toolbar>

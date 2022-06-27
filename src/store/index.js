@@ -8,15 +8,17 @@ export const defStore = defineStore('def', {
     config: {
       view: 'lhr lpr lfr',
       theme: 'light',
-      swapMenuAndSetting: true,
       primary: '#55b5ad',
+      swapMenuAndSetting: true,
       drawer: true,
       drawerRight: false,
       isReveal: true,
       headerInset: true,
       navMenus: true,
-      breadcrumbs: true
-    }
+      breadcrumbs: true,
+      footer: false
+    },
+    exclude: []
   }),
   getters: {},
   actions: {

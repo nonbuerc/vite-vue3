@@ -11,7 +11,7 @@ import { defStore } from '../store/index'
           <NavMenus />
           <Breadcrumbs />
           <q-scroll-area
-            class="col full-height inset-shadow q-px-sm"
+            class="col full-height inset-shadow q-px-sm q-pt-sm"
             :content-style="{ height: '100%' }"
             @scroll="
               (info) =>
@@ -22,10 +22,11 @@ import { defStore } from '../store/index'
           >
             <div class="fit">
               <q-spinner-bars color="primary" size="xl" class="absolute-center" v-if="false" />
-              <router-view v-slot="{ Component }">
+              <router-view v-slot="{ Component, route }">
+                <!-- route -->
                 <transition appear enter-active-class="animated fadeInLeft">
-                  <keep-alive>
-                    <component :is="Component" />
+                  <keep-alive :exclude="defStore().exclude">
+                    <component :is="Component" :key="route.name" />
                   </keep-alive>
                 </transition>
               </router-view>
