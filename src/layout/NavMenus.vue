@@ -69,4 +69,3 @@ const change = (i) => {
   </q-toolbar>
 </template>
 
-<style lang="scss" scoped></style>
