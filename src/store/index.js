@@ -18,7 +18,8 @@ export const defStore = defineStore('def', {
       breadcrumbs: true,
       footer: false
     },
-    exclude: []
+    // containerScrollAcrollContent: 'auto',
+    include: []
   }),
   getters: {},
   actions: {

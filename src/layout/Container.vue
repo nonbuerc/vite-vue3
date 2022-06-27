@@ -1,5 +1,5 @@
 <script setup>
-import { NavMenus, Breadcrumbs } from './index'
+import { NavMenus, Breadcrumbs, Default } from './index'
 
 import { defStore } from '../store/index'
 </script>
@@ -10,31 +10,25 @@ import { defStore } from '../store/index'
         <div class="column full-height q-pa-sm inset-shadow">
           <NavMenus />
           <Breadcrumbs />
-          <q-scroll-area
-            class="col full-height inset-shadow q-px-sm q-pt-sm"
-            :content-style="{ height: '100%' }"
-            @scroll="
-              (info) =>
-                defStore().$patch(
-                  (state) => (state.config.isReveal = info.verticalPosition > 500 ? false : true)
-                )
-            "
-          >
-            <div class="fit">
-              <q-spinner-bars color="primary" size="xl" class="absolute-center" v-if="false" />
-              <router-view v-slot="{ Component, route }">
-                <!-- route -->
-                <transition appear enter-active-class="animated fadeInLeft">
-                  <keep-alive :exclude="defStore().exclude">
-                    <component :is="Component" :key="route.name" />
-                  </keep-alive>
-                </transition>
-              </router-view>
-            </div>
-          </q-scroll-area>
+
+          <div class="col full-height inset-shadow q-px-sm q-pt-sm">
+            <q-spinner-bars color="primary" size="xl" class="absolute-center" v-if="false" />
+            <q-scroll-area
+              class="fit"
+              :content-style="{ height: '100%' }"
+              @scroll="
+                (info) =>
+                  defStore().$patch(
+                    (state) => (state.config.isReveal = info.verticalPosition > 500 ? false : true)
+                  )
+              "
+            >
+              <!-- :content-style="{ height:containerScrollAcrollContent }" -->
+              <Default />
+            </q-scroll-area>
+          </div>
         </div>
       </div>
     </q-page>
   </q-page-container>
 </template>
-<style lang="sass" scoped></style>

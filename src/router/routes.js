@@ -5,8 +5,7 @@ const routes = [
     component: () => import('../views/Home.vue'),
     meta: {
       label: '首页',
-      icon: 'home',
-      keepAlive: false
+      icon: 'home'
     }
   },
   {
@@ -89,7 +88,7 @@ const setRoutes = (routes = []) => {
   return routes.map((r) => {
     r = setRoute(r)
     if (r.children) {
-      //   r = { ...r, component: () => import('../views/Default.vue') }
+      r = { ...r, component: () => import('../layout/Default.vue') }
       r.children = [...setRoutes(r.children)]
     }
 
@@ -101,13 +100,13 @@ const setRoute = (route) => {
   route = {
     ...route,
     meta: {
+      //默认true
       keepAlive: true,
       ...route.meta
     }
   }
   //开发中
   if (!route.component && !route.children) {
-    // && !route.children
     route = {
       ...route,
       component: () => import('../views/Developing.vue'),
