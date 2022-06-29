@@ -1,10 +1,10 @@
 <script setup>
-import { ref, reactive } from 'vue'
-import Slots from '../components/Slots.vue'
-const show = ref(false)
-const text = ref('123')
+import { ref, reactive } from "vue";
+import Slots from "../components/Slots.vue";
+const show = ref(false);
+const text = ref("123");
 
-const num = 5
+const num = 5;
 </script>
 <template>
   <div class="full-height text-primary">

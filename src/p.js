@@ -1,8 +1,8 @@
 export const fun = () => {
-    console.log('123456')
+  console.log('123456')
 }
 export default () => {
-    return {
-        fun
-    }
+  return {
+    fun
+  }
 }

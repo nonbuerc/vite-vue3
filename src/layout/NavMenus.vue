@@ -68,4 +68,3 @@ const change = (i) => {
     <q-btn flat round dense icon="more_vert" />
   </q-toolbar>
 </template>
-
