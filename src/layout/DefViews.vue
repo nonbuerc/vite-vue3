@@ -9,7 +9,7 @@ const exclude = computed(() => defStore().exclude)
   <router-view v-slot="{ Component, route }">
     <transition appear enter-active-class="animated fadeInLeft">
       <!-- route -->
-      <keep-alive :include="include">
+      <keep-alive :include="['DefViews', ...include]">
         <component :is="Component" :key="route.name" />
       </keep-alive>
     </transition>
