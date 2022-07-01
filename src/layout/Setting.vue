@@ -93,14 +93,16 @@ const options = reactive([
   ]
 ])
 //布局
-const view = computed(() => {
-  return groups.join('').replace(/(.{3})/g, '$1 ')
-})
+console.log(groups)
 watch(
-  () => view.value,
-  () => {
-    console.log(view.value)
-    defStore().$patch((state) => (state.config.view = view.value))
+  () => groups,
+  (data) => {
+    console.log(groups)
+
+    defStore().$patch((state) => (state.config.view = data.join('').replace(/(.{3})/g, '$1 ')))
+  },
+  {
+    deep: true
   }
 )
 const bgColor = computed(() => {
@@ -151,8 +153,8 @@ watch(
 setCssVar('primary', defStore().config.primary)
 watch(
   () => defStore().config.primary,
-  () => {
-    setCssVar('primary', defStore().config.primary)
+  (data) => {
+    setCssVar('primary', data)
   }
 )
 </script>

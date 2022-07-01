@@ -3,10 +3,10 @@ module.exports = {
     browser: true,
     es2021: true
   },
-  plugins: ['vue'],
+  plugins: ['prettier'],
 
   extends: [
-    'plugin:vue/essential',
+    'plugin:vue/vue3-recommended',
     'airbnb-base',
     'plugin:prettier/recommended' // 添加 prettier 插件
   ],

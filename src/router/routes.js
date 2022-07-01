@@ -1,16 +1,17 @@
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
       label: '首页',
-      icon: 'home'
+      icon: 'home',
+      keepAlive: false
     }
   },
   {
     path: '/about',
-    name: 'about',
+    name: 'About',
     component: () => import('../views/About.vue'),
     meta: {
       label: '关于',
@@ -35,7 +36,7 @@ const routes = [
         children: [
           {
             path: 'menu1-1',
-            name: 'menu1-1',
+            name: 'Menu11',
             component: () => import('../views/sys/Menu11.vue'),
             meta: {
               label: '菜单1-1',
@@ -52,7 +53,7 @@ const routes = [
             children: [
               {
                 path: 'menu1-2-1',
-                name: 'menu1-2-1',
+                name: 'Menu121',
                 component: () => import('../views/sys/Menu121.vue'),
                 meta: {
                   label: '菜单1-2-1',
@@ -61,7 +62,7 @@ const routes = [
               },
               {
                 path: 'menu1-2-2',
-                name: 'menu1-2-2',
+                name: 'Menu122',
                 component: () => import('../views/sys/Menu122.vue'),
                 meta: {
                   label: '菜单1-2-2',
@@ -74,7 +75,7 @@ const routes = [
       },
       {
         path: 'menu2',
-        name: 'menu2',
+        name: 'Menu2',
         // component: () => import('../views/Home.vue'),
         meta: {
           label: '菜单2',
@@ -88,7 +89,7 @@ const setRoutes = (routes = []) => {
   return routes.map((r) => {
     r = setRoute(r)
     if (r.children) {
-      r = { ...r, component: () => import('../layout/Default.vue') }
+      r = { ...r, component: () => import('../layout/DefViews.vue') }
       r.children = [...setRoutes(r.children)]
     }
 

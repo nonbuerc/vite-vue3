@@ -19,7 +19,8 @@ export const defStore = defineStore('def', {
       footer: false
     },
     // containerScrollAcrollContent: 'auto',
-    include: []
+    include: [],
+    exclude: []
   }),
   getters: {},
   actions: {

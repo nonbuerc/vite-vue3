@@ -12,6 +12,10 @@ router.beforeEach((to, from, next) => {
   if (to.meta.keepAlive && !defStore().include.includes(to.name)) {
     defStore().$patch((state) => (state.include = [...state.include, to.name]))
   }
+  if (!to.meta.keepAlive && !defStore().exclude.includes(to.name)) {
+    defStore().$patch((state) => (state.exclude = [...state.exclude, to.name]))
+  }
+
   if (!router.hasRoute(to.name)) {
     router.addRoute({
       path: '/:pathMatch(.*)*',

@@ -1,0 +1,3 @@
+# .gitignore忽略项目依赖和打包文件
+./node_modules
+./dist

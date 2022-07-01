@@ -16,7 +16,7 @@ const isShadow = ref(false)
     :class="{ 'inset-shadow': isShadow }"
   >
     <template v-for="(v, i) in props.item.children" :key="i">
-      <q-item :to="{ name: v.name }" v-if="!v.children">
+      <q-item :to="{ name: v.name }" v-if="!v.children" :class="{ 'text-primary': !isShadow }">
         <q-item-section avatar>
           <q-icon :name="v.meta.icon" />
         </q-item-section>
