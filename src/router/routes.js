@@ -89,7 +89,7 @@ const setRoutes = (routes = []) => {
   return routes.map((r) => {
     r = setRoute(r)
     if (r.children) {
-      r = { ...r, component: () => import('../layout/DefViews.vue') }
+      r = { ...r, component: () => import('../layout/DefViews.vue'), name: 'DefViews' }
       r.children = [...setRoutes(r.children)]
     }
 

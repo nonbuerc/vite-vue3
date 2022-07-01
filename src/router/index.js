@@ -9,6 +9,8 @@ const router = createRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
+  console.log(to)
+  console.log(from)
   if (to.meta.keepAlive && !defStore().include.includes(to.name)) {
     defStore().$patch((state) => (state.include = [...state.include, to.name]))
   }
