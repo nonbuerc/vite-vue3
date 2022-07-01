@@ -17,6 +17,7 @@ const getFirstLevelRoute = (route) => {
       <!-- route -->
       <keep-alive :include="['DefViews', ...include]">
         <component :is="Component" />
+        <!-- :key="route.name"    加上会重复渲染子页面-->
       </keep-alive>
     </transition>
   </router-view>
