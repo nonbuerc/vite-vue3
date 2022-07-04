@@ -1,5 +1,5 @@
 <script setup>
-import { NavMenus, Breadcrumbs, DefViews } from './index'
+import { NavMenus, Breadcrumbs, BlankView } from './index'
 
 import { defStore } from '../store/index'
 </script>
@@ -24,7 +24,7 @@ import { defStore } from '../store/index'
               "
             >
               <!-- :content-style="{ height:containerScrollAcrollContent }" -->
-              <DefViews />
+              <BlankView />
             </q-scroll-area>
           </div>
         </div>

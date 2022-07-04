@@ -10,7 +10,7 @@ import { defStore } from '../store/index'
     <q-drawer
       :side="defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       class="inset-shadow q-pa-sm"
-      v-model="defStore().config.drawer"
+      v-model="defStore().config.drawerMenu"
       :width="260"
       :breakpoint="700"
     >
@@ -20,7 +20,7 @@ import { defStore } from '../store/index'
     </q-drawer>
     <q-drawer
       :side="!defStore().config.swapMenuAndSetting ? 'left' : 'right'"
-      v-model="defStore().config.drawerRight"
+      v-model="defStore().config.drawerSetting"
       :width="330"
       :breakpoint="500"
       behavior="desktop"

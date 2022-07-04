@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
-console.log(routes)
 
 import { defStore } from '../store/index'
 
@@ -9,25 +8,53 @@ const router = createRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(from)
+  //设置navMenus
+  setNavMenus(to)
+
+  //设置KeepAlive
+  setKeepAlive(to)
+
+  //设置404页面
+  set404(to, next)
+
+  next()
+})
+
+const setNavMenus = (to) => {
+  if (!defStore().navMenus.some((r) => r.name === to.name) && to.name !== 'home')
+    defStore().$patch(
+      (state) =>
+        (state.navMenus = [
+          ...state.navMenus,
+          {
+            label: to.meta.label,
+            name: to.name
+          }
+        ])
+    )
+}
+
+//设置404页面
+const set404 = (to, next) => {
+  if (!router.hasRoute(to.name)) {
+    let index = to.fullPath.lastIndexOf('/')
+    let path = to.fullPath.slice(0, index)
+    router.addRoute({
+      path: path + '/404',
+      name: '404',
+      component: () => import('../views/404.vue')
+    })
+    next({ name: '404' })
+    return
+  }
+}
+//设置KeepAlive
+const setKeepAlive = (to) => {
   if (to.meta.keepAlive && !defStore().include.includes(to.name)) {
     defStore().$patch((state) => (state.include = [...state.include, to.name]))
   }
   if (!to.meta.keepAlive && !defStore().exclude.includes(to.name)) {
     defStore().$patch((state) => (state.exclude = [...state.exclude, to.name]))
   }
-
-  if (!router.hasRoute(to.name)) {
-    router.addRoute({
-      path: '/:pathMatch(.*)*',
-      name: '404',
-      component: () => import('../views/404.vue')
-    })
-    next({ name: '404' })
-  } else {
-    next()
-  }
-})
-
+}
 export default router

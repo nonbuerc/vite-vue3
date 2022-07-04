@@ -1,20 +1,35 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 import { defStore } from '../store/index'
+import { useRoute, useRouter } from 'vue-router'
 
-const act = ref(-999)
-const navMenus = ref(10)
+const route = useRoute()
+const router = useRouter()
 
-const change = (i) => {
-  act.value = i
+const active = ref(route.name)
+watch(
+  () => route.name,
+  () => {
+    active.value = route.name
+  }
+)
+const cancel = (i) => {
+  let name = ''
+  if (i !== defStore().navMenus.length - 1) {
+    name = defStore().navMenus[i + 1].name
+  } else {
+    name = defStore().navMenus[i - 1].name
+  }
+  if (name !== active.value) router.push({ name })
+
+  defStore().$patch((state) => state.navMenus.splice(i, 1))
 }
 </script>
 
 <template>
   <q-toolbar class="inset-shadow" v-if="defStore().config.navMenus">
     <q-tabs
-      v-model="act"
       align="left"
       stretch
       shrink
@@ -24,43 +39,33 @@ const change = (i) => {
       dense
       content-class="q-gutter-x-sm "
     >
-      <!-- <q-tab v-for="(v, i) in navMenus" :key="i" :name="i"> -->
-      <q-btn-group push glossy class="text-no-wrap">
+      <q-btn-group push glossy class="text-no-wrap" v-for="(v, i) in defStore().navMenus" :key="i">
         <q-btn
           push
-          :color="act === -999 ? 'primary' : ''"
-          :text-color="act !== -999 ? 'primary' : ''"
-          :label="`首页`"
-          @click="change(-999)"
-        >
-        </q-btn>
+          :color="active === v.name ? 'primary' : ''"
+          :text-color="active !== v.name ? 'primary' : ''"
+          :label="v.label"
+          :to="{ name: v.name }"
+        />
+
         <q-btn
-          v-if="act === -999"
-          push
-          padding="0.2rem"
-          size="0.5rem"
-          text-color="primary"
-          icon="refresh"
-        ></q-btn>
-      </q-btn-group>
-      <q-btn-group push glossy class="text-no-wrap" v-for="(v, i) in navMenus" :key="i">
-        <q-btn
-          push
-          :color="act === i ? 'primary' : ''"
-          :text-color="act !== i ? 'primary' : ''"
-          :label="`菜单${v}`"
-          @click="change(i)"
-        >
-        </q-btn>
-        <q-btn
-          v-if="act === i"
+          v-if="active === v.name"
           push
           padding="0.2rem"
           size="0.5rem"
           text-color="primary"
           icon="refresh"
-        ></q-btn>
-        <q-btn push padding="0.2rem" size="0.5rem" text-color="red" icon="cancel"></q-btn>
+        />
+
+        <q-btn
+          v-if="v.name !== 'home'"
+          push
+          padding="0.2rem"
+          size="0.5rem"
+          text-color="red"
+          icon="cancel"
+          @click="cancel(i)"
+        />
       </q-btn-group>
       <!-- </q-tab> -->
     </q-tabs>

@@ -10,23 +10,26 @@ export const defStore = defineStore('def', {
       theme: 'light',
       primary: '#55b5ad',
       swapMenuAndSetting: true,
-      drawer: true,
-      drawerRight: false,
+      showDrawerMenu: true,
+      drawerMenu: true,
+      showDrawerSetting: true,
+      drawerSetting: false,
       isReveal: true,
       headerInset: true,
       navMenus: true,
       breadcrumbs: true,
-      footer: false
+      footer: true
     },
-    // containerScrollAcrollContent: 'auto',
     include: [],
-    exclude: []
+    exclude: [],
+    navMenus: [
+      {
+        label: '首页',
+        name: 'home'
+      }
+    ]
   }),
   getters: {},
-  actions: {
-    // changeSetting(data) {
-    //   console.log(data)
-    //   this.isShowSetting = data
-    // }
-  }
+  actions: {},
+  persist: true
 })

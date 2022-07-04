@@ -7,7 +7,10 @@ import { defStore } from '../store/index'
     <q-toolbar>
       <div class="q-gutter-md">
         <q-btn
-          @click="defStore().$patch((state) => (state.config.drawer = !state.config.drawer))"
+          v-if="defStore().config.showDrawerMenu || false"
+          @click="
+            defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
+          "
           round
           dense
           icon="menu"
@@ -24,15 +27,15 @@ import { defStore } from '../store/index'
         <q-btn round>
           <q-avatar>
             <q-img src="https://cdn.quasar.dev/img/avatar.png" />
-            <!-- <q-img src="../assets/abc.jpg" /> -->
           </q-avatar>
         </q-btn>
         <q-btn
+          v-if="defStore().config.showDrawerSetting || false"
           round
           dense
           icon="more_vert"
           @click="
-            defStore().$patch((state) => (state.config.drawerRight = !state.config.drawerRight))
+            defStore().$patch((state) => (state.config.drawerSetting = !state.config.drawerSetting))
           "
         />
       </div>

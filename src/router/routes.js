@@ -1,7 +1,7 @@
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: () => import('../views/Home.vue'),
     meta: {
       label: '首页',
@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'About',
+    name: 'about',
     component: () => import('../views/About.vue'),
     meta: {
       label: '关于',
@@ -36,7 +36,7 @@ const routes = [
         children: [
           {
             path: 'menu1-1',
-            name: 'Menu11',
+            name: 'menu11',
             component: () => import('../views/sys/Menu11.vue'),
             meta: {
               label: '菜单1-1',
@@ -53,7 +53,7 @@ const routes = [
             children: [
               {
                 path: 'menu1-2-1',
-                name: 'Menu121',
+                name: 'menu121',
                 component: () => import('../views/sys/Menu121.vue'),
                 meta: {
                   label: '菜单1-2-1',
@@ -62,7 +62,7 @@ const routes = [
               },
               {
                 path: 'menu1-2-2',
-                name: 'Menu122',
+                name: 'menu122',
                 component: () => import('../views/sys/Menu122.vue'),
                 meta: {
                   label: '菜单1-2-2',
@@ -75,7 +75,7 @@ const routes = [
       },
       {
         path: 'menu2',
-        name: 'Menu2',
+        name: 'menu2',
         // component: () => import('../views/Home.vue'),
         meta: {
           label: '菜单2',
@@ -89,10 +89,15 @@ const setRoutes = (routes = []) => {
   return routes.map((r) => {
     r = setRoute(r)
     if (r.children) {
-      r = { ...r, component: () => import('../layout/DefViews.vue'), name: 'DefViews' }
+      r = {
+        component: () => import('../layout/BlankView.vue'),
+        redirect: {
+          name: r.children[0]?.name
+        },
+        ...r
+      }
       r.children = [...setRoutes(r.children)]
     }
-
     return r
   })
 }
@@ -109,12 +114,12 @@ const setRoute = (route) => {
   //开发中
   if (!route.component && !route.children) {
     route = {
-      ...route,
       component: () => import('../views/Developing.vue'),
       meta: {
         ...route.meta,
         keepAlive: false
-      }
+      },
+      ...route
     }
   }
   return route

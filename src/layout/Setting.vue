@@ -8,7 +8,7 @@ import { defStore } from '../store/index'
 const $q = useQuasar()
 
 //布局
-const groups = reactive(['l', 'h', 'r', 'l', 'p', 'r', 'l', 'f', 'r'])
+const groups = reactive(defStore().config.view.replace(/ /g, '').split(''))
 const options = reactive([
   [
     {
@@ -93,12 +93,9 @@ const options = reactive([
   ]
 ])
 //布局
-console.log(groups)
 watch(
   () => groups,
   (data) => {
-    console.log(groups)
-
     defStore().$patch((state) => (state.config.view = data.join('').replace(/(.{3})/g, '$1 ')))
   },
   {
@@ -140,26 +137,33 @@ const bgColor = computed(() => {
     }
   }
 })
-
 //主题
+if (defStore().config.theme === 'dark' && !$q.dark.isActive) $q.dark.set(true)
+
 watch(
   () => defStore().config.theme,
-  () => {
-    $q.dark.toggle()
-  }
+  () => $q.dark.toggle()
 )
 
 //主题色
 setCssVar('primary', defStore().config.primary)
 watch(
   () => defStore().config.primary,
-  (data) => {
-    setCssVar('primary', data)
-  }
+  (data) => setCssVar('primary', data)
+)
+//菜单
+watch(
+  () => defStore().config.showDrawerMenu,
+  (data) => defStore().$patch((state) => (state.config.drawerMenu = data ? true : false))
+)
+//设置
+watch(
+  () => defStore().config.showDrawerSetting,
+  (data) => defStore().$patch((state) => (state.config.drawerSetting = data ? true : false))
 )
 </script>
 <template>
-  <!-- <q-dialog v-model="defStore().config.drawerRight" position="right" maximized> -->
+  <!-- <q-dialog v-model="defStore().config.drawerSetting" position="right" maximized> -->
   <!-- <q-card class="fit q-pa-sm"> -->
   <q-list dense>
     <q-item>
@@ -221,7 +225,7 @@ watch(
     <q-separator spaced inset />
 
     <q-item>
-      <q-item-section class="text-primary">NavMenus</q-item-section>
+      <q-item-section class="text-primary">NavMenu</q-item-section>
       <q-item-section avatar>
         <q-toggle v-model="defStore().config.navMenus" />
       </q-item-section>
@@ -237,9 +241,17 @@ watch(
     <q-separator spaced inset />
 
     <q-item>
-      <q-item-section class="text-primary">ShowLeftMenus</q-item-section>
+      <q-item-section class="text-primary">ShowDrawerMenu</q-item-section>
       <q-item-section avatar>
-        <q-toggle v-model="defStore().config.drawer" />
+        <q-toggle v-model="defStore().config.showDrawerMenu" />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset />
+
+    <q-item>
+      <q-item-section class="text-primary">ShowDrawerSetting</q-item-section>
+      <q-item-section avatar>
+        <q-toggle v-model="defStore().config.showDrawerSetting" />
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
