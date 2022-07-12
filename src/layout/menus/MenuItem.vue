@@ -1,22 +1,29 @@
 <script setup>
 import { ref } from 'vue'
-
 const props = defineProps({
   item: Object
 })
-const isShadow = ref(false)
+
+const expanded = ref(false)
 </script>
 <template>
   <q-expansion-item
-    v-model="isShadow"
+    v-model="expanded"
     :icon="props.item.meta.icon"
     :label="props.item.meta.label"
     dense-toggle
     :content-inset-level="0.3"
-    :class="{ 'inset-shadow': isShadow }"
+    :class="{ 'inset-shadow': expanded }"
+    header-class="text-primary"
+    exact-active-class="text-primary"
   >
     <template v-for="(v, i) in props.item.children" :key="i">
-      <q-item :to="{ name: v.name }" v-if="!v.children" :class="{ 'text-primary': !isShadow }">
+      <q-item
+        v-ripple
+        active-class="bg-primary text-white"
+        :to="{ name: v.name }"
+        v-if="!v.children"
+      >
         <q-item-section avatar>
           <q-icon :name="v.meta.icon" />
         </q-item-section>

@@ -1,7 +1,8 @@
 <script setup>
-import { Menu, Header, Container, Setting } from './index'
-
+import { useRouter } from 'vue-router'
 import { defStore } from '../store/index'
+
+import { Menu, Header, Container, Setting } from './index'
 </script>
 
 <template>
@@ -15,7 +16,7 @@ import { defStore } from '../store/index'
       :breakpoint="700"
     >
       <q-scroll-area class="fit inset-shadow">
-        <Menu></Menu>
+        <Menu :routes="useRouter().options.routes"></Menu>
       </q-scroll-area>
     </q-drawer>
     <q-drawer
