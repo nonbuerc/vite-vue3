@@ -21,7 +21,7 @@ router.beforeEach((to, from, next) => {
 })
 
 const setNavMenus = (to) => {
-  if (!defStore().navMenus.some((r) => r.name === to.name) && to.name !== 'home')
+  if (!defStore().navMenus.some((r) => r.name === to.name) && to.name !== 'Home')
     defStore().$patch(
       (state) =>
         (state.navMenus = [
@@ -50,6 +50,7 @@ const set404 = (to, next) => {
 }
 //设置KeepAlive
 const setKeepAlive = (to) => {
+  //name要和组件名一致
   if (to.meta.keepAlive && !defStore().include.includes(to.name)) {
     defStore().$patch((state) => (state.include = [...state.include, to.name]))
   }

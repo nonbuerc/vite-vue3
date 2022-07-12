@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, nextTick } from 'vue'
 
 import { defStore } from '../store/index'
 import { useRoute, useRouter } from 'vue-router'
@@ -14,7 +14,17 @@ watch(
     active.value = route.name
   }
 )
-const cancel = (i) => {
+
+const refresh = (v) => {
+  defStore().$patch((state) => (state.exclude = [...state.exclude, v.name]))
+  defStore().$patch((state) => (state.refreshView = false))
+  nextTick(() => {
+    defStore().$patch((state) => (state.refreshView = true))
+    defStore().$patch((state) => (state.exclude = state.exclude.filter((r) => r !== v.name)))
+  })
+}
+
+const del = (i) => {
   let name = ''
   if (i !== defStore().navMenus.length - 1) {
     name = defStore().navMenus[i + 1].name
@@ -55,16 +65,17 @@ const cancel = (i) => {
           size="0.5rem"
           text-color="primary"
           icon="refresh"
+          @click="refresh(v)"
         />
 
         <q-btn
-          v-if="v.name !== 'home'"
+          v-if="v.name !== 'Home'"
           push
           padding="0.2rem"
           size="0.5rem"
           text-color="red"
           icon="cancel"
-          @click="cancel(i)"
+          @click="del(i)"
         />
       </q-btn-group>
       <!-- </q-tab> -->

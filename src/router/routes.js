@@ -1,7 +1,7 @@
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: () => import('../views/Home.vue'),
     meta: {
       label: '首页',
@@ -11,7 +11,7 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'about',
+    name: 'About',
     component: () => import('../views/About.vue'),
     meta: {
       label: '关于',
@@ -20,7 +20,7 @@ const routes = [
   },
   {
     path: '/menu',
-    name: 'menu',
+    name: 'Menu',
     meta: {
       label: '菜单',
       icon: 'star'
@@ -28,7 +28,7 @@ const routes = [
     children: [
       {
         path: 'menu1',
-        name: 'menu1',
+        name: 'Menu1',
         meta: {
           label: '菜单1',
           icon: 'star'
@@ -36,7 +36,7 @@ const routes = [
         children: [
           {
             path: 'menu1-1',
-            name: 'menu11',
+            name: 'Menu11',
             component: () => import('../views/sys/Menu11.vue'),
             meta: {
               label: '菜单1-1',
@@ -45,7 +45,7 @@ const routes = [
           },
           {
             path: 'menu1-2',
-            name: 'menu1-2',
+            name: 'Menu1-2',
             meta: {
               label: '菜单1-2',
               icon: 'star'
@@ -53,7 +53,7 @@ const routes = [
             children: [
               {
                 path: 'menu1-2-1',
-                name: 'menu121',
+                name: 'Menu121',
                 component: () => import('../views/sys/Menu121.vue'),
                 meta: {
                   label: '菜单1-2-1',
@@ -62,7 +62,7 @@ const routes = [
               },
               {
                 path: 'menu1-2-2',
-                name: 'menu122',
+                name: 'Menu122',
                 component: () => import('../views/sys/Menu122.vue'),
                 meta: {
                   label: '菜单1-2-2',
@@ -75,7 +75,7 @@ const routes = [
       },
       {
         path: 'menu2',
-        name: 'menu2',
+        name: 'Menu2',
         // component: () => import('../views/Home.vue'),
         meta: {
           label: '菜单2',

@@ -1,7 +1,10 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const text1 = ref('321')
+onMounted(() => {
+  console.log(123)
+})
 </script>
 <template>
   <div style="height: 100px">

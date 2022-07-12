@@ -3,6 +3,10 @@ import { defineStore } from 'pinia'
 // useStore could be anything like useUser, useCart
 // the first argument is a unique id of the store across your application
 export const defStore = defineStore('def', {
+  persist: {
+    storage: window.sessionStorage,
+    paths: ['config', 'navMenus']
+  },
   // other options...
   state: () => ({
     config: {
@@ -25,11 +29,11 @@ export const defStore = defineStore('def', {
     navMenus: [
       {
         label: '首页',
-        name: 'home'
+        name: 'Home'
       }
-    ]
+    ],
+    refreshView: true
   }),
   getters: {},
-  actions: {},
-  persist: true
+  actions: {}
 })
