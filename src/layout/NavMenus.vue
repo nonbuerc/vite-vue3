@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, nextTick } from 'vue'
+import { ref, watchEffect, nextTick } from 'vue'
 
 import { defStore } from '../store/index'
 import { useRoute, useRouter } from 'vue-router'
@@ -8,20 +8,16 @@ const route = useRoute()
 const router = useRouter()
 
 const active = ref(route.name)
-watch(
-  () => route.name,
-  () => {
-    active.value = route.name
-  }
-)
+watchEffect(() => {
+  active.value = route.name
+})
 
-const refresh = (v) => {
+const refresh = async (v) => {
   defStore().$patch((state) => (state.exclude = [...state.exclude, v.name]))
   defStore().$patch((state) => (state.refreshView = false))
-  nextTick(() => {
-    defStore().$patch((state) => (state.refreshView = true))
-    defStore().$patch((state) => (state.exclude = state.exclude.filter((r) => r !== v.name)))
-  })
+  await nextTick()
+  defStore().$patch((state) => (state.refreshView = true))
+  defStore().$patch((state) => (state.exclude = state.exclude.filter((r) => r !== v.name)))
 }
 
 const del = (i) => {

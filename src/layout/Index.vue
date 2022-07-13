@@ -1,8 +1,21 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { defStore } from '../store/index'
 
 import { Menu, Header, Container, Setting } from './index'
+
+const route = useRoute()
+const defOpen = computed(() => {
+  let arr = []
+  route.matched &&
+    route.matched.forEach((r) => {
+      if (r.children?.length > 0) {
+        arr = [...arr, r.name]
+      }
+    })
+  return arr
+})
 </script>
 
 <template>
@@ -16,7 +29,7 @@ import { Menu, Header, Container, Setting } from './index'
       :breakpoint="700"
     >
       <q-scroll-area class="fit inset-shadow">
-        <Menu :routes="useRouter().options.routes"></Menu>
+        <Menu :routes="useRouter().options.routes" :defOpen="defOpen"></Menu>
       </q-scroll-area>
     </q-drawer>
     <q-drawer

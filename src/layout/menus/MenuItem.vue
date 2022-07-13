@@ -1,10 +1,18 @@
 <script setup>
-import { ref } from 'vue'
-const props = defineProps({
-  item: Object
-})
+import { ref, watchEffect } from 'vue'
 
+const props = defineProps({
+  item: Object,
+  defOpen: {
+    type: Array,
+    default: () => []
+  }
+})
 const expanded = ref(false)
+watchEffect(() => {
+  if (props.defOpen?.some((r) => r === props.item.name))
+    expanded.value = props.defOpen?.some((r) => r === props.item.name)
+})
 </script>
 <template>
   <q-expansion-item
@@ -14,8 +22,7 @@ const expanded = ref(false)
     dense-toggle
     :content-inset-level="0.3"
     :class="{ 'inset-shadow': expanded }"
-    header-class="text-primary"
-    exact-active-class="text-primary"
+    :header-class="{ 'text-primary': expanded }"
   >
     <template v-for="(v, i) in props.item.children" :key="i">
       <q-item
@@ -29,7 +36,7 @@ const expanded = ref(false)
         </q-item-section>
         <q-item-section>{{ v.meta.label }}</q-item-section>
       </q-item>
-      <MenuItem v-if="v.children" :item="v"></MenuItem>
+      <MenuItem v-if="v.children" :item="v" :defOpen="defOpen"></MenuItem>
     </template>
   </q-expansion-item>
 </template>
