@@ -10,6 +10,8 @@ const props = defineProps({
 })
 const expanded = ref(false)
 watchEffect(() => {
+  //只打开一个
+  // expanded.value = props.defOpen?.some((r) => r === props.item.name)
   if (props.defOpen?.some((r) => r === props.item.name))
     expanded.value = props.defOpen?.some((r) => r === props.item.name)
 })
