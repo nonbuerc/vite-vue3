@@ -36,7 +36,7 @@ watch(
   <q-layout :view="defStore().config.view" style="height: 100vh; overflow: hidden">
     <Header></Header>
     <q-drawer
-      v-if="defStore().config.menuPosition === 'left' && defStore().config.showMenu"
+      v-if="['all', 'left'].includes(defStore().config.menuPosition) && defStore().config.showMenu"
       :side="defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawerMenu"

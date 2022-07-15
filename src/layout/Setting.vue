@@ -153,7 +153,7 @@ watch(
 )
 //菜单
 watch(
-  () => defStore().config.showDrawerMenu,
+  () => defStore().config.showMenu,
   (data) => defStore().$patch((state) => (state.config.drawerMenu = data ? true : false))
 )
 //设置
@@ -194,14 +194,6 @@ watch(
     <q-separator spaced inset />
 
     <q-item>
-      <q-item-section class="text-primary">SwapMenuAndSetting</q-item-section>
-      <q-item-section avatar>
-        <q-toggle v-model="defStore().config.swapMenuAndSetting" />
-      </q-item-section>
-    </q-item>
-    <q-separator spaced inset />
-
-    <q-item>
       <q-item-section class="text-primary"> 主题 </q-item-section>
       <q-item-section avatar>
         <q-btn-toggle
@@ -212,6 +204,30 @@ watch(
             { label: '黑暗', value: 'dark' }
           ]"
         />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset />
+
+    <q-item>
+      <q-item-section class="text-primary"> 菜单位置 </q-item-section>
+      <q-item-section avatar>
+        <q-btn-toggle
+          v-model="defStore().config.menuPosition"
+          glossy
+          :options="[
+            { label: 'All', value: 'all' },
+            { label: 'Left', value: 'left' },
+            { label: 'Header', value: 'header' }
+          ]"
+        />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset />
+
+    <q-item>
+      <q-item-section class="text-primary">SwapMenuAndSetting</q-item-section>
+      <q-item-section avatar>
+        <q-toggle v-model="defStore().config.swapMenuAndSetting" />
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
@@ -241,20 +257,20 @@ watch(
     <q-separator spaced inset />
 
     <q-item>
-      <q-item-section class="text-primary">ShowDrawerMenu</q-item-section>
+      <q-item-section class="text-primary">showMenu</q-item-section>
       <q-item-section avatar>
-        <q-toggle v-model="defStore().config.showDrawerMenu" />
+        <q-toggle v-model="defStore().config.showMenu" />
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
 
-    <q-item>
+    <!-- <q-item>
       <q-item-section class="text-primary">ShowDrawerSetting</q-item-section>
       <q-item-section avatar>
         <q-toggle v-model="defStore().config.showDrawerSetting" />
       </q-item-section>
     </q-item>
-    <q-separator spaced inset />
+    <q-separator spaced inset /> -->
 
     <q-item>
       <q-item-section class="text-primary">Footer</q-item-section>

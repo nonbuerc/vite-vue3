@@ -81,6 +81,59 @@ const routes = [
           label: '菜单2',
           icon: 'star'
         }
+      },
+      {
+        path: 'menu3',
+        name: 'Menu3',
+        // component: () => import('../views/Home.vue'),
+        meta: {
+          label: '菜单3',
+          icon: 'star'
+        }
+      },
+      {
+        path: 'menu4',
+        name: 'Menu4',
+        // component: () => import('../views/Home.vue'),
+        meta: {
+          label: '菜单4',
+          icon: 'star'
+        }
+      },
+      {
+        path: 'menu5',
+        name: 'Menu5',
+        // component: () => import('../views/Home.vue'),
+        meta: {
+          label: '菜单5',
+          icon: 'star'
+        }
+      }
+    ]
+  },
+  {
+    path: '/view',
+    name: 'View',
+    meta: {
+      label: '视图',
+      icon: 'star'
+    },
+    children: [
+      {
+        path: '/view1',
+        name: 'View1',
+        meta: {
+          label: '视图1',
+          icon: 'star'
+        }
+      },
+      {
+        path: '/view2',
+        name: 'View2',
+        meta: {
+          label: '视图2',
+          icon: 'star'
+        }
       }
     ]
   }

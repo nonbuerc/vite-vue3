@@ -14,10 +14,11 @@ export const defStore = defineStore('def', {
       theme: 'light',
       primary: '#55b5ad',
       swapMenuAndSetting: true,
-      showDrawerMenu: true,
+      showMenu: true,
+      menuPosition: 'left',
       drawerMenu: true,
       showDrawerSetting: true,
-      drawerSetting: false,
+      drawerSetting: true,
       isReveal: true,
       headerInset: true,
       navMenus: true,
@@ -32,6 +33,7 @@ export const defStore = defineStore('def', {
         name: 'Home'
       }
     ],
+    selMenu: [],
     refreshView: true
   }),
   getters: {},
