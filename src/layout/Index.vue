@@ -1,27 +1,42 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { defStore } from '../store/index'
 
 import { Menu, Header, Container, Setting } from './index'
 
 const route = useRoute()
-const defOpen = computed(() => {
-  let arr = []
-  route.matched &&
-    route.matched.forEach((r) => {
-      if (r.children?.length > 0) {
-        arr = [...arr, r.name]
-      }
-    })
-  return arr
-})
+console.log(route)
+watch(
+  () => route.matched,
+  () => {
+    defStore().$patch((state) => (state.selMenu = []))
+    route.matched &&
+      route.matched.forEach((r) => {
+        if (r.children?.length > 0) {
+          // arr = [...arr, r.name]
+          defStore().$patch((state) => (state.selMenu = [...state.selMenu, r.name]))
+        }
+      })
+  }
+)
+// const selMenu = computed(() => {
+//   let arr = []
+//   route.matched &&
+//     route.matched.forEach((r) => {
+//       if (r.children?.length > 0) {
+//         arr = [...arr, r.name]
+//       }
+//     })
+//   return arr
+// })
 </script>
 
 <template>
   <q-layout :view="defStore().config.view" style="height: 100vh; overflow: hidden">
     <Header></Header>
     <q-drawer
+      v-if="defStore().config.menuPosition === 'left' && defStore().config.showMenu"
       :side="defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawerMenu"
@@ -29,7 +44,11 @@ const defOpen = computed(() => {
       :breakpoint="700"
     >
       <q-scroll-area class="fit inset-shadow">
-        <Menu :routes="useRouter().options.routes" :defOpen="defOpen"></Menu>
+        <Menu
+          :routes="useRouter().options.routes"
+          :selMenu="defStore().selMenu"
+          :mode="'vertical'"
+        ></Menu>
       </q-scroll-area>
     </q-drawer>
     <q-drawer
