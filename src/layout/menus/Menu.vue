@@ -2,7 +2,10 @@
 import MenuItem from './MenuItem.vue'
 
 const props = defineProps({
-  routes: Array,
+  routes: {
+    type: Array,
+    default: () => []
+  },
   selMenu: {
     type: Array,
     default: () => []

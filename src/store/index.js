@@ -34,7 +34,8 @@ export const defStore = defineStore('def', {
       }
     ],
     selMenu: [],
-    refreshView: true
+    refreshView: true,
+    resize: {}
   }),
   getters: {},
   actions: {}

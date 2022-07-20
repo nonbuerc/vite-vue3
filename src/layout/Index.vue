@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watch } from 'vue'
+import { watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { defStore } from '../store/index'
 
@@ -9,31 +9,26 @@ const route = useRoute()
 console.log(route)
 watch(
   () => route.matched,
-  () => {
+  (v) => {
     defStore().$patch((state) => (state.selMenu = []))
-    route.matched &&
-      route.matched.forEach((r) => {
+    v &&
+      v.forEach((r) => {
         if (r.children?.length > 0) {
-          // arr = [...arr, r.name]
           defStore().$patch((state) => (state.selMenu = [...state.selMenu, r.name]))
         }
       })
   }
 )
-// const selMenu = computed(() => {
-//   let arr = []
-//   route.matched &&
-//     route.matched.forEach((r) => {
-//       if (r.children?.length > 0) {
-//         arr = [...arr, r.name]
-//       }
-//     })
-//   return arr
-// })
+const resize = (size) => {
+  defStore().$patch((state) => {
+    state.resize = size
+    if (size.width < 800) state.resize.hideMenu = true
+  })
+}
 </script>
 
 <template>
-  <q-layout :view="defStore().config.view" style="height: 100vh; overflow: hidden">
+  <q-layout :view="defStore().config.view" style="height: 100vh; overflow: hidden" @resize="resize">
     <Header></Header>
     <q-drawer
       v-if="['all', 'left'].includes(defStore().config.menuPosition) && defStore().config.showMenu"
@@ -41,7 +36,7 @@ watch(
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawerMenu"
       :width="260"
-      :breakpoint="700"
+      :breakpoint="1000"
     >
       <q-scroll-area class="fit inset-shadow">
         <Menu
@@ -55,8 +50,7 @@ watch(
       :side="!defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       v-model="defStore().config.drawerSetting"
       :width="330"
-      :breakpoint="500"
-      behavior="desktop"
+      :breakpoint="1000"
       class="inset-shadow q-pa-sm"
     >
       <q-scroll-area class="fit inset-shadow q-py-sm">
