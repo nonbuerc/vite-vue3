@@ -5,7 +5,7 @@ import { defStore } from '../store/index'
 </script>
 <template>
   <q-page-container>
-    <q-page class="row q-px-sm q-pt-sm" :class="{ 'inset-shadow': defStore().config.showMenu }">
+    <q-page class="row q-pa-sm" :class="{ 'inset-shadow': defStore().config.showMenu }">
       <div class="col-12">
         <div class="column full-height">
           <NavMenus />

@@ -8,7 +8,6 @@ import { useRouter } from 'vue-router'
 import { Menu } from './index'
 
 const $q = useQuasar()
-console.log($q)
 //主题
 if (!defStore().config.theme) $q.dark.set(true)
 
