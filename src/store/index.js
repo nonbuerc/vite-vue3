@@ -11,11 +11,11 @@ export const defStore = defineStore('def', {
   state: () => ({
     config: {
       view: 'lhr lpr lfr',
-      theme: 'light',
+      theme: false,
       primary: '#55b5ad',
       swapMenuAndSetting: true,
       showMenu: true,
-      menuPosition: 'left',
+      menuPosition: 'All',
       drawerMenu: true,
       showDrawerSetting: true,
       drawerSetting: true,

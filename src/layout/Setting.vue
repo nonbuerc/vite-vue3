@@ -137,13 +137,6 @@ const bgColor = computed(() => {
     }
   }
 })
-//主题
-if (defStore().config.theme === 'dark' && !$q.dark.isActive) $q.dark.set(true)
-
-watch(
-  () => defStore().config.theme,
-  () => $q.dark.toggle()
-)
 
 //主题色
 setCssVar('primary', defStore().config.primary)
@@ -194,16 +187,13 @@ watch(
     <q-separator spaced inset />
 
     <q-item>
-      <q-item-section class="text-primary"> 主题 </q-item-section>
+      <q-item-section class="text-primary">主题色</q-item-section>
       <q-item-section avatar>
-        <q-btn-toggle
-          v-model="defStore().config.theme"
-          glossy
-          :options="[
-            { label: '明亮', value: 'light' },
-            { label: '黑暗', value: 'dark' }
-          ]"
-        />
+        <q-btn round push color="primary">
+          <q-popup-proxy transition-show="scale" transition-hide="scale">
+            <q-color v-model="defStore().config.primary" />
+          </q-popup-proxy>
+        </q-btn>
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
@@ -214,6 +204,7 @@ watch(
         <q-btn-toggle
           v-model="defStore().config.menuPosition"
           glossy
+          size="sm"
           :options="[
             { label: 'All', value: 'all' },
             { label: 'Left', value: 'left' },

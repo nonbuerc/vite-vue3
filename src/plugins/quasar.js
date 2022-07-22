@@ -1,5 +1,8 @@
 import {
-  Quasar
+  Quasar,
+  AppFullscreen,
+  LoadingBar
+
   // , Notify, LoadingBar, Dark
 } from 'quasar'
 import lang from 'quasar/lang/zh-CN'
@@ -18,6 +21,8 @@ import '@quasar/extras/animate/fadeInLeft.css'
 export default (app) => {
   app.use(Quasar, {
     plugins: {
+      AppFullscreen,
+      LoadingBar
       /*Notify, LoadingBar, Dark*/
     },
     lang: lang
