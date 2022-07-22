@@ -17,6 +17,17 @@ watch(
     console.log(v)
   }
 )
+const change = () => {
+  if (defStore().config.drawerMenu) {
+    defStore().$patch((state) => {
+      state.config.miniDrawerMenu = !state.config.miniDrawerMenu
+      state.config.drawerMenu = !state.config.miniDrawerMenu
+    })
+  } else {
+    defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
+  }
+  //  defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
+}
 </script>
 
 <template>
@@ -31,7 +42,7 @@ watch(
         v-if="
           ['all', 'left'].includes(defStore().config.menuPosition) && defStore().config.showMenu
         "
-        @click="defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))"
+        @click="change()"
         round
         dense
         icon="menu"

@@ -1,5 +1,5 @@
 <script setup>
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { defStore } from '../store/index'
 
@@ -25,6 +25,8 @@ const resize = (size) => {
     if (size.width < 800) state.resize.hideMenu = true
   })
 }
+
+const miniDrawerMenu = ref(false)
 </script>
 
 <template>
@@ -35,8 +37,13 @@ const resize = (size) => {
       :side="defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawerMenu"
-      :width="260"
+      :mini="defStore().config.miniDrawerMenu"
+      @mouseover="defStore().$patch((state) => (state.config.drawerMenu = false))"
+      @mouseout="defStore().$patch((state) => (state.config.drawerMenu = true))"
+      show-if-above
+      :mini-to-overlay="defStore().config.miniDrawerMenu"
       :breakpoint="1000"
+      :width="260"
     >
       <q-scroll-area class="fit inset-shadow">
         <Menu
