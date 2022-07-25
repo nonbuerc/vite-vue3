@@ -11,15 +11,15 @@ export const defStore = defineStore('def', {
   state: () => ({
     config: {
       view: 'lhr lpr lfr', //布局
-      theme: false, //主题
+      theme: true, //主题
       primary: '#55b5ad', //主题色
       swapMenuAndSetting: true, //交换菜单设置位置
       showMenu: true, //是否需要菜单
-      menuPosition: 'All', //需要菜单位置
+      menuPosition: 'all', //需要菜单位置
       drawerMenu: true, //是否显示左侧菜单
       miniDrawerMenu: false,
       showDrawerSetting: true, //是否需要设置
-      drawerSetting: true, //是否显示左侧菜单
+      drawerSetting: false, //是否显示右侧设置
       isReveal: true,
       headerInset: true,
       navMenus: true,

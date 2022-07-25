@@ -20,13 +20,14 @@ watch(
 const change = () => {
   if (defStore().config.drawerMenu) {
     defStore().$patch((state) => {
-      state.config.miniDrawerMenu = !state.config.miniDrawerMenu
       state.config.drawerMenu = !state.config.miniDrawerMenu
+
+      state.config.miniDrawerMenu = !state.config.miniDrawerMenu
     })
   } else {
     defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
   }
-  //  defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
+  // defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
 }
 </script>
 

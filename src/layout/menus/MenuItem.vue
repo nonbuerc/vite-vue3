@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
+import { defStore } from '../../store/index'
 
 const props = defineProps({
   item: Object,
@@ -24,7 +25,7 @@ watch(
 )
 </script>
 <template>
-  <template v-if="mode === 'vertical'">
+  <template v-if="mode === 'vertical' && !defStore().config.miniDrawerMenu">
     <q-expansion-item
       v-model="expanded"
       :icon="item.meta.icon"
@@ -49,6 +50,35 @@ watch(
         </template>
       </template>
     </q-expansion-item>
+  </template>
+  <template v-if="mode === 'vertical' && defStore().config.miniDrawerMenu">
+    <q-item>
+      <q-item-section avatar>
+        <q-icon :name="item.meta.icon" :color="selMenu.includes(item.name) && 'primary'" />
+      </q-item-section>
+      <q-item-section :class="{ 'text-primary': selMenu.includes(item.name) }"
+        >{{ item.meta.label }}
+      </q-item-section>
+      <q-item-section side>
+        <q-icon name="arrow_right" :color="selMenu.includes(item.name) && 'primary'" />
+      </q-item-section>
+
+      <q-menu anchor="top right" transition-show="scale" transition-hide="scale">
+        <template v-for="(v, i) in item.children" :key="i">
+          <template v-if="!v.children">
+            <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
+              <q-item-section avatar>
+                <q-icon :name="v.meta.icon" />
+              </q-item-section>
+              <q-item-section>{{ v.meta.label }}</q-item-section>
+            </q-item>
+          </template>
+          <template v-if="v.children">
+            <MenuItem :item="v" :selMenu="selMenu" :key="item.name" :mode="mode"></MenuItem>
+          </template>
+        </template>
+      </q-menu>
+    </q-item>
   </template>
   <template v-if="mode === 'horizontal'">
     <q-btn-dropdown

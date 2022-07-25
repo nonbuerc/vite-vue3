@@ -25,8 +25,6 @@ const resize = (size) => {
     if (size.width < 800) state.resize.hideMenu = true
   })
 }
-
-const miniDrawerMenu = ref(false)
 </script>
 
 <template>
@@ -38,10 +36,7 @@ const miniDrawerMenu = ref(false)
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawerMenu"
       :mini="defStore().config.miniDrawerMenu"
-      @mouseover="defStore().$patch((state) => (state.config.drawerMenu = false))"
-      @mouseout="defStore().$patch((state) => (state.config.drawerMenu = true))"
       show-if-above
-      :mini-to-overlay="defStore().config.miniDrawerMenu"
       :breakpoint="1000"
       :width="260"
     >
@@ -52,6 +47,14 @@ const miniDrawerMenu = ref(false)
           :mode="'vertical'"
         ></Menu>
       </q-scroll-area>
+      <!-- <div class="q-mini-drawer-hide absolute align-center" style="right: 0px">
+        <q-icon
+          dense
+          round
+          name="keyboard_double_arrow_right"
+          @click="defStore().$patch((state) => (state.config.miniDrawerMenu = true))"
+        />
+      </div> -->
     </q-drawer>
     <q-drawer
       :side="!defStore().config.swapMenuAndSetting ? 'left' : 'right'"
