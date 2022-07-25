@@ -1,13 +1,10 @@
 <script setup>
 import { watch } from 'vue'
-import { useQuasar } from 'quasar'
 
 import { defStore } from '../store/index'
-import { useRouter } from 'vue-router'
 
 import { Menu } from './index'
 
-const $q = useQuasar()
 //主题
 if (!defStore().config.theme) $q.dark.set(true)
 
@@ -17,18 +14,6 @@ watch(
     console.log(v)
   }
 )
-const change = () => {
-  if (defStore().config.drawerMenu) {
-    defStore().$patch((state) => {
-      state.config.drawerMenu = !state.config.miniDrawerMenu
-
-      state.config.miniDrawerMenu = !state.config.miniDrawerMenu
-    })
-  } else {
-    defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
-  }
-  // defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))
-}
 </script>
 
 <template>
@@ -43,7 +28,7 @@ const change = () => {
         v-if="
           ['all', 'left'].includes(defStore().config.menuPosition) && defStore().config.showMenu
         "
-        @click="change()"
+        @click="defStore().$patch((state) => (state.config.drawerMenu = !state.config.drawerMenu))"
         round
         dense
         icon="menu"
@@ -69,11 +54,12 @@ const change = () => {
         v-if="
           ['all', 'header'].includes(defStore().config.menuPosition) &&
           !defStore().resize.hideMenu &&
-          defStore().config.showMenu
+          defStore().config.showMenu &&
+          !$q.platform.is.mobile
         "
       >
         <Menu
-          :routes="useRouter().options.routes"
+          :routes="$router.options.routes"
           :selMenu="defStore().selMenu"
           mode="horizontal"
         ></Menu>

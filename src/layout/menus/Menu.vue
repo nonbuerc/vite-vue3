@@ -13,8 +13,13 @@ const props = defineProps({
   mode: {
     type: String,
     default: 'horizontal'
+  },
+  mini: {
+    type: Boolean,
+    default: false
   }
 })
+const emit = defineEmits()
 </script>
 <template>
   <template v-if="mode === 'vertical'">
@@ -29,10 +34,20 @@ const props = defineProps({
           </q-item>
         </template>
         <template v-if="v.children">
-          <MenuItem :item="v" :selMenu="selMenu" :key="v.name" :mode="mode"></MenuItem
+          <MenuItem :item="v" :selMenu="selMenu" :key="v.name" :mode="mode" :mini="mini"></MenuItem
         ></template>
       </template>
     </q-list>
+    <div class="full-width fixed-bottom-left" v-if="!$q.platform.is.mobile">
+      <q-btn
+        class="full-width"
+        flat
+        color="primary"
+        size="sm"
+        :icon="mini ? 'keyboard_double_arrow_right' : 'keyboard_double_arrow_left'"
+        @click="emit('update:mini', !mini)"
+      />
+    </div>
   </template>
 
   <template v-if="mode === 'horizontal'">

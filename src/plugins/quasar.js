@@ -2,7 +2,6 @@ import {
   Quasar,
   AppFullscreen,
   LoadingBar
-
   // , Notify, LoadingBar, Dark
 } from 'quasar'
 import lang from 'quasar/lang/zh-CN'
@@ -19,6 +18,7 @@ import '@quasar/extras/animate/fadeInLeft.css'
 // import '@quasar/extras/animate/fadeOutRight.css'
 
 export default (app) => {
+  console.log(app)
   app.use(Quasar, {
     plugins: {
       AppFullscreen,

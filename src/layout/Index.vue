@@ -1,12 +1,11 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { ref, watch, useAttrs, useSlots } from 'vue'
 import { defStore } from '../store/index'
-
+import { useRoute } from 'vue-router'
 import { Menu, Header, Container, Setting } from './index'
-
+console.log(useAttrs())
+console.log(useSlots())
 const route = useRoute()
-console.log(route)
 watch(
   () => route.matched,
   (v) => {
@@ -25,6 +24,7 @@ const resize = (size) => {
     if (size.width < 800) state.resize.hideMenu = true
   })
 }
+const mini = ref(false)
 </script>
 
 <template>
@@ -35,26 +35,18 @@ const resize = (size) => {
       :side="defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawerMenu"
-      :mini="defStore().config.miniDrawerMenu"
-      show-if-above
       :breakpoint="1000"
-      :width="260"
+      :mini="mini"
+      :width="230"
     >
       <q-scroll-area class="fit inset-shadow">
         <Menu
-          :routes="useRouter().options.routes"
+          :routes="$router.options.routes"
           :selMenu="defStore().selMenu"
           :mode="'vertical'"
+          v-model:mini="mini"
         ></Menu>
       </q-scroll-area>
-      <!-- <div class="q-mini-drawer-hide absolute align-center" style="right: 0px">
-        <q-icon
-          dense
-          round
-          name="keyboard_double_arrow_right"
-          @click="defStore().$patch((state) => (state.config.miniDrawerMenu = true))"
-        />
-      </div> -->
     </q-drawer>
     <q-drawer
       :side="!defStore().config.swapMenuAndSetting ? 'left' : 'right'"

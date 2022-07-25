@@ -11,6 +11,10 @@ const props = defineProps({
   mode: {
     type: String,
     default: 'horizontal'
+  },
+  mini: {
+    type: Boolean,
+    default: false
   }
 })
 const expanded = ref(false)
@@ -25,45 +29,49 @@ watch(
 )
 </script>
 <template>
-  <template v-if="mode === 'vertical' && !defStore().config.miniDrawerMenu">
+  <template v-if="mode === 'vertical'">
     <q-expansion-item
       v-model="expanded"
       :icon="item.meta.icon"
       :label="item.meta.label"
       dense-toggle
+      :expanded-icon="mini ? 'arrow_right' : undefined"
+      :expand-icon="mini ? 'arrow_right' : undefined"
       :content-inset-level="0.3"
-      :class="{ 'inset-shadow': expanded }"
-      :header-class="{ 'text-primary': selMenu.includes(item.name) }"
+      :class="{ 'inset-shadow': expanded && !mini }"
+      :header-class="{ 'text-primary': expanded || selMenu.includes(item.name) }"
       :auto-close="false"
     >
-      <template v-for="(v, i) in item.children" :key="i">
-        <template v-if="!v.children">
-          <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
-            <q-item-section avatar>
-              <q-icon :name="v.meta.icon" />
-            </q-item-section>
-            <q-item-section>{{ v.meta.label }}</q-item-section>
-          </q-item>
-        </template>
-        <template v-if="v.children">
-          <MenuItem :item="v" :selMenu="selMenu" :key="item.name" :mode="mode"></MenuItem>
-        </template>
+      <template v-slot:header v-if="mini">
+        <q-item-section avatar>
+          <q-icon :name="item.meta.icon" :color="selMenu.includes(item.name) ? 'primary' : ''" />
+        </q-item-section>
+        <q-item-section :class="{ 'text-primary': selMenu.includes(item.name) }"
+          >{{ item.meta.label }}
+        </q-item-section>
+        <q-menu anchor="top right" transition-show="scale" transition-hide="scale">
+          <template v-for="(v, i) in item.children" :key="i">
+            <template v-if="!v.children">
+              <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
+                <q-item-section avatar>
+                  <q-icon :name="v.meta.icon" />
+                </q-item-section>
+                <q-item-section>{{ v.meta.label }}</q-item-section>
+              </q-item>
+            </template>
+            <template v-if="v.children">
+              <MenuItem
+                :item="v"
+                :selMenu="selMenu"
+                :key="item.name"
+                :mode="mode"
+                :mini="mini"
+              ></MenuItem>
+            </template>
+          </template>
+        </q-menu>
       </template>
-    </q-expansion-item>
-  </template>
-  <template v-if="mode === 'vertical' && defStore().config.miniDrawerMenu">
-    <q-item>
-      <q-item-section avatar>
-        <q-icon :name="item.meta.icon" :color="selMenu.includes(item.name) && 'primary'" />
-      </q-item-section>
-      <q-item-section :class="{ 'text-primary': selMenu.includes(item.name) }"
-        >{{ item.meta.label }}
-      </q-item-section>
-      <q-item-section side>
-        <q-icon name="arrow_right" :color="selMenu.includes(item.name) && 'primary'" />
-      </q-item-section>
-
-      <q-menu anchor="top right" transition-show="scale" transition-hide="scale">
+      <template v-if="!mini">
         <template v-for="(v, i) in item.children" :key="i">
           <template v-if="!v.children">
             <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
@@ -77,9 +85,44 @@ watch(
             <MenuItem :item="v" :selMenu="selMenu" :key="item.name" :mode="mode"></MenuItem>
           </template>
         </template>
+      </template>
+    </q-expansion-item>
+  </template>
+  <!-- <template v-if="mode === 'vertical' && mini">
+    <q-item>
+      <q-item-section avatar>
+        <q-icon :name="item.meta.icon" :color="selMenu.includes(item.name) ? 'primary' : ''" />
+      </q-item-section>
+      <q-item-section :class="{ 'text-primary': selMenu.includes(item.name) }"
+        >{{ item.meta.label }}
+      </q-item-section>
+      <q-item-section side>
+        <q-icon name="arrow_right" :color="selMenu.includes(item.name) ? 'primary' : ''" />
+      </q-item-section>
+
+      <q-menu anchor="top right" transition-show="scale" transition-hide="scale">
+        <template v-for="(v, i) in item.children" :key="i">
+          <template v-if="!v.children">
+            <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
+              <q-item-section avatar>
+                <q-icon :name="v.meta.icon" />
+              </q-item-section>
+              <q-item-section>{{ v.meta.label }}</q-item-section>
+            </q-item>
+          </template>
+          <template v-if="v.children">
+            <MenuItem
+              :item="v"
+              :selMenu="selMenu"
+              :key="item.name"
+              :mode="mode"
+              :mini="mini"
+            ></MenuItem>
+          </template>
+        </template>
       </q-menu>
     </q-item>
-  </template>
+  </template> -->
   <template v-if="mode === 'horizontal'">
     <q-btn-dropdown
       class="full-height"

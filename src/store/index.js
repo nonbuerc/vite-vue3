@@ -17,7 +17,6 @@ export const defStore = defineStore('def', {
       showMenu: true, //是否需要菜单
       menuPosition: 'all', //需要菜单位置
       drawerMenu: true, //是否显示左侧菜单
-      miniDrawerMenu: false,
       showDrawerSetting: true, //是否需要设置
       drawerSetting: false, //是否显示右侧设置
       isReveal: true,
