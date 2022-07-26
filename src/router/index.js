@@ -8,14 +8,14 @@ const router = createRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
+  //设置404页面
+  if (set404(to, next)) return
+
   //设置navMenus
   setNavMenus(to)
 
   //设置KeepAlive
   setKeepAlive(to)
-
-  //设置404页面
-  set404(to, next)
 
   next()
 })
@@ -45,8 +45,9 @@ const set404 = (to, next) => {
       component: () => import('../views/404.vue')
     })
     next({ name: '404' })
-    return
+    return true
   }
+  return false
 }
 //设置KeepAlive
 const setKeepAlive = (to) => {

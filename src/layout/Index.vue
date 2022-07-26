@@ -1,10 +1,10 @@
 <script setup>
-import { ref, watch, useAttrs, useSlots } from 'vue'
+import { ref, watch } from 'vue'
 import { defStore } from '../store/index'
 import { useRoute } from 'vue-router'
 import { Menu, Header, Container, Setting } from './index'
-console.log(useAttrs())
-console.log(useSlots())
+import { getCurrentInstance } from 'vue'
+console.log(getCurrentInstance())
 const route = useRoute()
 watch(
   () => route.matched,
