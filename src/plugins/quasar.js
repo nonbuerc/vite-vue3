@@ -18,7 +18,6 @@ import '@quasar/extras/animate/fadeInLeft.css'
 // import '@quasar/extras/animate/fadeOutRight.css'
 
 export default (app) => {
-  console.log(app)
   app.use(Quasar, {
     plugins: {
       AppFullscreen,

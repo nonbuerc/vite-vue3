@@ -2,7 +2,6 @@
 import { defStore } from '../store/index'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-console.log(route.matched)
 </script>
 <template>
   <q-breadcrumbs class="inset-shadow q-px-md q-py-xs" v-if="defStore().config.breadcrumbs">

@@ -1,6 +1,5 @@
 <script setup>
 import MenuItem from './MenuItem.vue'
-
 const props = defineProps({
   routes: {
     type: Array,
@@ -29,8 +28,19 @@ const emit = defineEmits()
           <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
             <q-item-section avatar>
               <q-icon :name="v.meta.icon" />
+              <q-tooltip
+                v-if="mini"
+                anchor="center right"
+                self="center left"
+                transition-show="scale"
+                transition-hide="scale"
+              >
+                {{ v.meta.label }}
+              </q-tooltip>
             </q-item-section>
-            <q-item-section>{{ v.meta.label }}</q-item-section>
+            <q-item-section>
+              {{ v.meta.label }}
+            </q-item-section>
           </q-item>
         </template>
         <template v-if="v.children">

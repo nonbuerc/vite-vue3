@@ -3,9 +3,9 @@ import { ref, watch } from 'vue'
 import { defStore } from '../store/index'
 import { useRoute } from 'vue-router'
 import { Menu, Header, Container, Setting } from './index'
-import { getCurrentInstance } from 'vue'
-console.log(getCurrentInstance())
+
 const route = useRoute()
+
 watch(
   () => route.matched,
   (v) => {
@@ -45,7 +45,8 @@ const mini = ref(false)
           :selMenu="defStore().selMenu"
           :mode="'vertical'"
           v-model:mini="mini"
-        ></Menu>
+        >
+        </Menu>
       </q-scroll-area>
     </q-drawer>
     <q-drawer
