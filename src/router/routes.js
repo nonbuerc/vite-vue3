@@ -143,7 +143,7 @@ const setRoutes = (routes = []) => {
     r = setRoute(r)
     if (r.children) {
       r = {
-        component: () => import('../layout/BlankView.vue'),
+        component: () => import('../layouts/BlankView.vue'),
         redirect: {
           name: r.children[0]?.name
         },
