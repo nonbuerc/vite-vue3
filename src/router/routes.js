@@ -136,6 +136,24 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/twoPackaging',
+    name: 'TwoPackaging',
+    component: () => import('../views/TwoPackaging.vue'),
+    meta: {
+      label: '二次封装',
+      icon: 'star'
+    }
+  },
+  {
+    path: '/slots',
+    name: 'Slots',
+    component: () => import('../views/Slots.vue'),
+    meta: {
+      label: '插槽',
+      icon: 'star'
+    }
   }
 ]
 const setRoutes = (routes = []) => {
