@@ -9,7 +9,7 @@ const $q = useQuasar()
 
 //布局
 const groups = reactive(defStore().config.view.replace(/ /g, '').split(''))
-const options = reactive([
+const options = [
   [
     {
       label: 'l',
@@ -91,7 +91,7 @@ const options = reactive([
       value: 'f'
     }
   ]
-])
+]
 //布局
 watch(
   () => groups,
@@ -162,7 +162,7 @@ watch(
     <q-item>
       <q-item-section class="text-primary"> 布局 </q-item-section>
     </q-item>
-    <q-item class="">
+    <q-item>
       <div class="row q-pa-sm inset-shadow">
         <div class="col-4" v-for="(v, i) in 9" :key="i">
           <div

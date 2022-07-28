@@ -3,9 +3,11 @@ import routes from './routes'
 
 import { defStore } from '../store/index'
 
+import { setRoutes } from '../hooks/index'
+
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes: [...setRoutes(routes())]
 })
 router.beforeEach((to, from, next) => {
   //设置404页面
