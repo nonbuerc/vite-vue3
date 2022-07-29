@@ -13,11 +13,11 @@ watchEffect(() => {
 })
 
 const refresh = async (v) => {
-  defStore().$patch((state) => (state.exclude = [...state.exclude, v.name]))
+  defStore().$patch((state) => (state.exclude = [...state.exclude, active.value]))
   defStore().$patch((state) => (state.refreshView = false))
   await nextTick()
   defStore().$patch((state) => (state.refreshView = true))
-  defStore().$patch((state) => (state.exclude = state.exclude.filter((r) => r !== v.name)))
+  defStore().$patch((state) => (state.exclude = state.exclude.filter((r) => r !== active.value)))
 }
 
 const del = (i) => {
@@ -34,7 +34,7 @@ const del = (i) => {
 </script>
 
 <template>
-  <q-toolbar class="inset-shadow" v-if="defStore().config.navMenus">
+  <q-toolbar class="inset-shadow q-py-sm" v-if="defStore().config.navMenus" style="min-height: 0px">
     <q-tabs
       align="left"
       stretch
@@ -43,40 +43,30 @@ const del = (i) => {
       narrow-indicator
       inline-label
       dense
-      content-class="q-gutter-x-sm "
+      content-class="q-gutter-x-sm"
     >
-      <q-btn-group push glossy class="text-no-wrap" v-for="(v, i) in defStore().navMenus" :key="i">
+      <q-btn-group class="text-no-wrap" v-for="(v, i) in defStore().navMenus" :key="i" push glossy>
         <q-btn
-          push
           :color="active === v.name ? 'primary' : ''"
           :text-color="active !== v.name ? 'primary' : ''"
           :label="v.label"
           :to="{ name: v.name }"
-        />
-
-        <q-btn
-          v-if="active === v.name"
-          push
-          padding="0.2rem"
-          size="0.5rem"
-          text-color="primary"
-          icon="refresh"
-          @click="refresh(v)"
+          size="sm"
         />
 
         <q-btn
           v-if="v.name !== 'Home'"
-          push
           padding="0.2rem"
-          size="0.5rem"
           text-color="red"
           icon="cancel"
           @click="del(i)"
+          size="0.3rem"
         />
       </q-btn-group>
       <!-- </q-tab> -->
     </q-tabs>
     <q-space />
-    <q-btn flat round dense icon="more_vert" />
+    <q-btn icon="refresh" @click="refresh()" flat round dense size="sm" />
+    <q-btn icon="more_vert" flat round dense size="sm" />
   </q-toolbar>
 </template>
