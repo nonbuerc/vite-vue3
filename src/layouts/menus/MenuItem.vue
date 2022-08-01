@@ -38,7 +38,7 @@ watch(
       :expanded-icon="mini ? 'arrow_right' : undefined"
       :expand-icon="mini ? 'arrow_right' : undefined"
       :content-inset-level="0.3"
-      :class="{ 'inset-shadow': expanded && !mini }"
+      :class="{ 'inset-shadow ': expanded && !mini }"
       :header-class="{ 'text-primary': expanded || selMenu.includes(item.name) }"
       :auto-close="false"
     >
@@ -52,7 +52,7 @@ watch(
         <q-menu anchor="top right" transition-show="scale" transition-hide="scale">
           <template v-for="(v, i) in item.children" :key="i">
             <template v-if="!v.children">
-              <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
+              <q-item v-ripple active-class="bg-primary text-white glossy" :to="{ name: v.name }">
                 <q-item-section avatar>
                   <q-icon :name="v.meta.icon" />
                 </q-item-section>
@@ -75,7 +75,7 @@ watch(
       <template v-if="!mini">
         <template v-for="(v, i) in item.children" :key="i">
           <template v-if="!v.children">
-            <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
+            <q-item v-ripple active-class="bg-primary text-white glossy" :to="{ name: v.name }">
               <q-item-section avatar>
                 <q-icon :name="v.meta.icon" />
               </q-item-section>

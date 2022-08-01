@@ -25,7 +25,7 @@ const emit = defineEmits()
     <q-list>
       <template v-for="(v, i) in props.routes" :key="i">
         <template v-if="!v.children">
-          <q-item v-ripple active-class="bg-primary text-white" :to="{ name: v.name }">
+          <q-item v-ripple active-class="bg-primary text-white glossy" :to="{ name: v.name }">
             <q-item-section avatar>
               <q-icon :name="v.meta.icon" />
               <q-tooltip
@@ -66,7 +66,7 @@ const emit = defineEmits()
       outside-arrows
       mobile-arrows
       align="left"
-      active-class="bg-primary text-white"
+      active-class="bg-primary text-white glossy"
     >
       <template v-for="(v, i) in props.routes" :key="i">
         <template v-if="!v.children">

@@ -72,6 +72,7 @@ watch(
        -->
 
       <q-btn
+        glossy
         class="q-mr-md"
         round
         dense
@@ -80,6 +81,7 @@ watch(
       />
 
       <q-btn
+        glossy
         class="q-mr-md"
         round
         dense
@@ -92,7 +94,7 @@ watch(
         "
       />
 
-      <q-btn round class="q-mr-md">
+      <q-btn round class="q-mr-md" glossy>
         <q-avatar>
           <q-img src="https://cdn.quasar.dev/img/avatar.png" />
         </q-avatar>
@@ -102,6 +104,7 @@ watch(
         v-if="defStore().config.showDrawerSetting || false"
         round
         dense
+        glossy
         icon="more_vert"
         @click="
           defStore().$patch((state) => (state.config.drawerSetting = !state.config.drawerSetting))
