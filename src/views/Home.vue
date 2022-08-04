@@ -5,7 +5,6 @@ import { date } from 'quasar'
 const timeStamp = Date.now()
 const formattedString = date.formatDate(timeStamp, 'HH:mm:ss')
 const text = ref('123')
-const time = ref(new Date().getTime)
 </script>
 
 <template>
