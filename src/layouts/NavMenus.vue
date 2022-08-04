@@ -44,7 +44,7 @@ const del = () => {
       narrow-indicator
       inline-label
       dense
-      content-class="q-gutter-x-sm"
+      content-class="q-gutter-x-xs"
     >
       <q-btn-group
         class="text-no-wrap"

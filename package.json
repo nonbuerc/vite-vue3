@@ -20,6 +20,7 @@
   "devDependencies": {
     "@quasar/vite-plugin": "^1.0.7",
     "@vitejs/plugin-vue": "^2.2.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.0",
     "eslint": "^8.11.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
