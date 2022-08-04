@@ -13,13 +13,7 @@ const time = ref(new Date().getTime)
 <template>
   <div class="full-height">
     Home首页
-    <div class="a">HomeHome首页</div>
     <q-input v-model="text" label="Standard" />
     <q-time v-model="formattedString" with-seconds format24h />
   </div>
 </template>
-<style>
-.a {
-  font-family: 'Open Sans';
-}
-</style>
