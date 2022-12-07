@@ -4,7 +4,9 @@ const onMainClick = (e) => {
   // console.log('Clicked on main button',e)
 }
 
-const onItemClick = (e) => {
+const onItemClick = async () => {
+  let res = await WeiXinList()
+  console.log(res)
   // console.log('Clicked on an Item',e)
 }
 </script>

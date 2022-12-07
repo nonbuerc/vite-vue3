@@ -12,7 +12,7 @@ watchEffect(() => {
   active.value = route.name
 })
 
-const refresh = async (v) => {
+const refresh = async () => {
   defStore().$patch((state) => (state.exclude = [...state.exclude, active.value]))
   defStore().$patch((state) => (state.refreshView = false))
   await nextTick()

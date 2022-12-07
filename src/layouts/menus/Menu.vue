@@ -1,5 +1,6 @@
 <script setup>
 import MenuItem from './MenuItem.vue'
+
 const props = defineProps({
   routes: {
     type: Array,
@@ -18,6 +19,7 @@ const props = defineProps({
     default: false
   }
 })
+
 const emit = defineEmits()
 </script>
 <template>
