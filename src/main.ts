@@ -13,5 +13,5 @@ const app = createApp(App)
 
 app.use(router).use(createPinia().use(piniaPluginPersistedstate))
 
-Object.values(import.meta.globEager('/src/plugins/*.js')).forEach((plugin) => plugin.default?.(app))
+Object.values(import.meta.glob('/src/plugins/*.ts', { eager: true })).forEach((plugin: any) => plugin.default?.(app))
 app.mount('#app')

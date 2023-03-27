@@ -1,8 +1,9 @@
+import { App } from 'vue'
 import {
-  Quasar,
-  AppFullscreen,
-  LoadingBar
-  // , Notify, LoadingBar, Dark
+    Quasar,
+    AppFullscreen,
+    LoadingBar
+    // , Notify, LoadingBar, Dark
 } from 'quasar'
 import lang from 'quasar/lang/zh-CN'
 
@@ -17,13 +18,13 @@ import 'quasar/src/css/index.sass'
 import '@quasar/extras/animate/fadeInLeft.css'
 // import '@quasar/extras/animate/fadeOutRight.css'
 
-export default (app) => {
-  app.use(Quasar, {
-    plugins: {
-      AppFullscreen,
-      LoadingBar
-      /*Notify, LoadingBar, Dark*/
-    },
-    lang: lang
-  })
+export default (app: App) => {
+    app.use(Quasar, {
+        plugins: {
+            AppFullscreen,
+            LoadingBar
+            /*Notify, LoadingBar, Dark*/
+        },
+        lang: lang
+    })
 }

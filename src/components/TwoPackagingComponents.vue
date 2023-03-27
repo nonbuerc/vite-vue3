@@ -1,10 +1,9 @@
-<script setup></script>
+<script setup lang="ts"></script>
 <template>
-  <slot name="aa" />
-  <q-separator spaced />
-  <q-btn-dropdown v-bind="$attrs || {}">
-    <template v-for="(item, index) in Object.keys($slots)" #[item]="scoped" :key="index">
-      <slot :name="item" v-bind="scoped || {}"></slot>
-    </template>
-  </q-btn-dropdown>
+    <slot name="aa" />
+    <q-btn-dropdown v-bind="$attrs || {}">
+        <template v-for="(slotContent, slotName) in $slots" #[slotName]="scoped" :key="slotName">
+            <slot :name="slotName" v-bind="scoped || {}"></slot>
+        </template>
+    </q-btn-dropdown>
 </template>
