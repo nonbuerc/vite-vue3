@@ -25,6 +25,9 @@ export default (): any => [
             label: '菜单',
             icon: 'star'
         },
+        redirect: {
+            name: 'Menu3'
+        },
         children: [
             {
                 path: 'menu1',
@@ -141,7 +144,6 @@ export default (): any => [
     {
         path: '/twoPackaging',
         name: 'TwoPackaging',
-        // compUrl: () => import('../views/TwoPackaging.vue'),
         compUrl: '/TwoPackaging',
         meta: {
             label: '二次封装',
@@ -151,7 +153,6 @@ export default (): any => [
     {
         path: '/slots',
         name: 'Slots',
-        // compUrl: () => import('../views/Slots.vue'),
         compUrl: '/TwoPackaging',
         meta: {
             label: '插槽',

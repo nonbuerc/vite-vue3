@@ -1,6 +1,5 @@
 // import { defineAsyncComponent } from 'vue'
 const modules = import.meta.glob('../views/**/**/*.vue')
-console.log(modules)
 
 const setRoute = (route: any) => {
     route = {
@@ -13,7 +12,9 @@ const setRoute = (route: any) => {
     }
     if (route.children) {
         route = {
-            component: route?.compUrl ? modules[`../views${route?.compUrl}.vue`] : modules['../views/BlankView.vue'],
+            component: route?.compUrl
+                ? modules[`../views${route?.compUrl}.vue`]
+                : () => import('../layouts/BlankView.vue'),
             redirect: {
                 name: route.children[0]?.name
             },
@@ -23,7 +24,9 @@ const setRoute = (route: any) => {
     if (!route.children) {
         //开发中
         route = {
-            component: route?.compUrl ? modules[`../views${route?.compUrl}.vue`] : modules['../views/Developing.vue'],
+            component: route?.compUrl
+                ? modules[`../views${route?.compUrl}.vue`]
+                : () => import('../layouts/Developing.vue'),
             meta: {
                 ...route.meta,
                 keepAlive: false

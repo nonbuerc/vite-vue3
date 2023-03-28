@@ -32,7 +32,7 @@ const set404 = (to: any, next: any) => {
         router.addRoute({
             path: path + '/404',
             name: '404',
-            component: () => import('../views/404.vue')
+            component: () => import('../layouts/404.vue')
         })
         next({ name: '404' })
         return true

@@ -13,11 +13,11 @@ const onItemClick = async () => {
 <template>
     <div class="fit">
         <TwoPackagingComponents split color="primary" push no-caps @show="onMainClick">
-            <template #aa>二次封装模板</template>
-            <template #label>
+            <template v-slot:aa>二次封装模板</template>
+            <template v-slot:label>
                 <div class="row items-center no-wrap">
                     <q-icon left name="map"></q-icon>
-                    <div class="text-center">useAttrs<br />useSlots</div>
+                    <div class="text-center">useAttrs/useSlots</div>
                 </div>
             </template>
             <q-list>
