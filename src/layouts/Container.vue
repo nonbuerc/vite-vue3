@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NavMenus, Breadcrumbs, BlankView } from './index.ts'
+import { NavMenus, Breadcrumbs, BlankView } from './index'
 
 import { defStore } from '../store/index'
 
@@ -28,7 +28,7 @@ import { defStore } from '../store/index'
                             @scroll="
                                 (info) =>
                                     defStore().$patch(
-                                        (state) => (state.config.isReveal = info.verticalPosition > 500 ? false : true)
+                                        (state:any) => (state.config.isReveal = info.verticalPosition > 500 ? false : true)
                                     )
                             "
                         >

@@ -48,7 +48,12 @@ const options = [
             value: 'L'
         }
     ],
-    'page',
+    [
+        {
+            label: 'page',
+            value: 'page'
+        }
+    ],
     [
         {
             label: 'r',
@@ -101,7 +106,7 @@ watch(
     }
 )
 const bgColor = computed(() => {
-    return (v: any, flag: any) => {
+    return (v: any, flag?: any) => {
         let bgColor = 'transparent'
         let height = '50px'
         if ([1, 2, 3].includes(v)) {
@@ -173,7 +178,7 @@ watch(
                             size="xs"
                             color="white "
                         />
-                        <div v-if="v === 5">{{ options[i] }}</div>
+                        <div v-else>{{ options[i][0].label }}</div>
                     </div>
                 </div>
             </div>
@@ -250,12 +255,12 @@ watch(
         <q-separator spaced inset />
 
         <!-- <q-item>
-      <q-item-section class="text-primary">ShowDrawerSetting</q-item-section>
-      <q-item-section avatar>
-        <q-toggle v-model="defStore().config.showDrawerSetting" />
-      </q-item-section>
-    </q-item>
-    <q-separator spaced inset /> -->
+            <q-item-section class="text-primary">ShowDrawerSetting</q-item-section>
+            <q-item-section avatar>
+                <q-toggle v-model="defStore().config.showDrawerSetting" />
+            </q-item-section>
+        </q-item>
+        <q-separator spaced inset /> -->
 
         <q-item>
             <q-item-section class="text-primary">Footer</q-item-section>
