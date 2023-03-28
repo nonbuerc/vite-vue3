@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useAttrs, useSlots } from 'vue'
+import { useAttrs, useSlots } from 'vue'
 
 const attrs = useAttrs()
 const slots = useSlots()
