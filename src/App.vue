@@ -3,5 +3,5 @@ import Index from './layouts/Index.vue'
 </script>
 
 <template>
-    <Index />
+  <Index />
 </template>
