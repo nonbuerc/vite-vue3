@@ -147,11 +147,7 @@ watch(
   () => defStore().config.primary,
   (data) => setCssVar('primary', data)
 )
-//菜单
-watch(
-  () => defStore().config.showMenu,
-  (data) => defStore().$patch((state: any) => (state.config.drawerMenu = data ? true : false))
-)
+
 //设置
 watch(
   () => defStore().config.showDrawerSetting,
@@ -188,10 +184,9 @@ watch(
       </div>
     </q-item>
     <q-separator spaced inset />
-
     <q-item>
       <q-item-section class="text-primary">主题色</q-item-section>
-      <q-item-section avatar>
+      <q-item-section side>
         <q-btn round push color="primary">
           <q-popup-proxy transition-show="scale" transition-hide="scale">
             <q-color v-model="defStore().config.primary" />
@@ -202,25 +197,28 @@ watch(
     <q-separator spaced inset />
 
     <q-item>
-      <q-item-section class="text-primary"> 菜单位置 </q-item-section>
-      <q-item-section avatar>
-        <q-btn-toggle
-          v-model="defStore().config.menuPosition"
-          glossy
-          size="sm"
-          :options="[
-            { label: 'All', value: 'all' },
-            { label: 'Left', value: 'left' },
-            { label: 'Header', value: 'header' }
-          ]"
-        />
+      <q-item-section class="text-primary">
+        <q-item-label> 菜单位置</q-item-label>
+        <q-item-label caption>
+          <q-btn-toggle
+            v-model="defStore().config.menuPosition"
+            glossy
+            size="sm"
+            :options="[
+              { label: 'All', value: 'all' },
+              { label: 'Left', value: 'left' },
+              { label: 'Header', value: 'header' },
+              { label: 'None', value: 'none' }
+            ]"
+          />
+        </q-item-label>
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
 
     <q-item>
       <q-item-section class="text-primary">SwapMenuAndSetting</q-item-section>
-      <q-item-section avatar>
+      <q-item-section side>
         <q-toggle v-model="defStore().config.swapMenuAndSetting" />
       </q-item-section>
     </q-item>
@@ -228,7 +226,7 @@ watch(
 
     <q-item>
       <q-item-section class="text-primary">HeaderInset</q-item-section>
-      <q-item-section avatar>
+      <q-item-section side>
         <q-toggle v-model="defStore().config.headerInset" />
       </q-item-section>
     </q-item>
@@ -236,7 +234,7 @@ watch(
 
     <q-item>
       <q-item-section class="text-primary">NavMenu</q-item-section>
-      <q-item-section avatar>
+      <q-item-section side>
         <q-toggle v-model="defStore().config.navMenus" />
       </q-item-section>
     </q-item>
@@ -244,23 +242,15 @@ watch(
 
     <q-item>
       <q-item-section class="text-primary">Breadcrumbs</q-item-section>
-      <q-item-section avatar>
+      <q-item-section side>
         <q-toggle v-model="defStore().config.breadcrumbs" />
-      </q-item-section>
-    </q-item>
-    <q-separator spaced inset />
-
-    <q-item>
-      <q-item-section class="text-primary">showMenu</q-item-section>
-      <q-item-section avatar>
-        <q-toggle v-model="defStore().config.showMenu" />
       </q-item-section>
     </q-item>
     <q-separator spaced inset />
 
     <!-- <q-item>
             <q-item-section class="text-primary">ShowDrawerSetting</q-item-section>
-            <q-item-section avatar>
+            <q-item-section side>
                 <q-toggle v-model="defStore().config.showDrawerSetting" />
             </q-item-section>
         </q-item>
@@ -268,7 +258,7 @@ watch(
 
     <q-item>
       <q-item-section class="text-primary">Footer</q-item-section>
-      <q-item-section avatar>
+      <q-item-section side>
         <q-toggle v-model="defStore().config.footer" />
       </q-item-section>
     </q-item>

@@ -10,12 +10,12 @@ const $q = useQuasar()
 //主题
 if (!defStore().config.theme) $q.dark.set(true)
 
-watch(
-  () => defStore().resize,
-  (v) => {
-    console.log(v)
-  }
-)
+// watch(
+//   () => defStore().resize,
+//   (v) => {
+//     console.log(v)
+//   }
+// )
 </script>
 
 <template>
@@ -27,9 +27,7 @@ watch(
   >
     <q-toolbar>
       <q-btn
-        v-if="
-          ['all', 'left'].includes(defStore().config.menuPosition) && defStore().config.showMenu
-        "
+        v-if="['all', 'left'].includes(defStore().config.menuPosition)"
         @click="
           defStore().$patch((state: any) => (state.config.drawerMenu = !state.config.drawerMenu))
         "
@@ -59,7 +57,6 @@ watch(
         v-if="
           ['all', 'header'].includes(defStore().config.menuPosition) &&
           !defStore().resize.hideMenu &&
-          defStore().config.showMenu &&
           !$q.platform.is.mobile
         "
       >

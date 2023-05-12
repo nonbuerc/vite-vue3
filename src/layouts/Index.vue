@@ -32,13 +32,14 @@ console.log(defStore().config.view)
   <q-layout :view="defStore().config.view" style="overflow: hidden; height: 100vh" @resize="resize">
     <Header></Header>
     <q-drawer
-      v-if="['all', 'left'].includes(defStore().config.menuPosition) && defStore().config.showMenu"
+      v-if="['all', 'left'].includes(defStore().config.menuPosition)"
       :side="defStore().config.swapMenuAndSetting ? 'left' : 'right'"
       class="inset-shadow q-pa-sm"
       v-model="defStore().config.drawerMenu"
       :breakpoint="1000"
       :mini="mini"
       :width="230"
+      :mini-width="100"
     >
       <q-scroll-area class="fit inset-shadow">
         <Menu
