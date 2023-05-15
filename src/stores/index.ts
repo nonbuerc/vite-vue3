@@ -14,7 +14,7 @@ export const defStore = defineStore('def', {
       theme: true, //主题
       primary: '#55b5ad', //主题色
       swapMenuAndSetting: true, //交换菜单设置位置
-      menuPosition: 'all', //需要菜单位置
+      menuPosition: 'all', //需要菜单位置 all
       drawerMenu: true, //是否显示左侧菜单
       showDrawerSetting: true, //是否需要设置
       drawerSetting: false, //是否显示右侧设置
