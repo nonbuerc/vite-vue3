@@ -5,33 +5,29 @@ const setRoute = (route: any) => {
   route = {
     ...route,
     meta: {
-      //缓存  //默认true
-      keepAlive: true,
+      //缓存  //默认false
+      keepAlive: false,
       ...route.meta
     }
   }
   if (route.children) {
     route = {
-      component: route?.compUrl
-        ? modules[`../views${route?.compUrl}.vue`]
+      ...route,
+      component: route?.component
+        ? modules[`../views${route?.component}.vue`]
         : () => import('../layouts/BlankView.vue'),
       redirect: {
         name: route.children[0]?.name
-      },
-      ...route
+      }
     }
   }
   if (!route.children) {
     //开发中
     route = {
-      component: route?.compUrl
-        ? modules[`../views${route?.compUrl}.vue`]
-        : () => import('../layouts/Developing.vue'),
-      meta: {
-        ...route.meta,
-        keepAlive: false
-      },
-      ...route
+      ...route,
+      component: route?.component
+        ? modules[`../views${route?.component}.vue`]
+        : () => import('../layouts/Developing.vue')
     }
   }
   return route

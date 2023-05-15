@@ -22,16 +22,11 @@ const refresh = async () => {
   )
 }
 
-const del = () => {
-  let i = defStore().navMenus.findIndex((r: any) => r.name === active.value)
-  let name = ''
-  if (i !== defStore().navMenus.length - 1) {
-    name = defStore().navMenus[i + 1].name
-  } else {
-    name = defStore().navMenus[i - 1].name
-  }
-  if (name !== active.value) router.push({ name })
-
+const del = (v: any, i: number) => {
+  let backName = router.options.history.state.back
+  let flag = defStore().navMenus.some((r: any) => r.path === backName)
+  if (v.name === active.value)
+    flag ? router.back() : router.push({ name: defStore().navMenus[0].name })
   defStore().$patch((state: any) => state.navMenus.splice(i, 1))
 }
 </script>
@@ -57,7 +52,7 @@ const del = () => {
       >
         <q-btn
           :color="active === v.name ? 'primary' : undefined"
-          :label="v.label"
+          :label="v.meta.label"
           :to="{ name: v.name }"
           size="sm"
         />
@@ -67,8 +62,8 @@ const del = () => {
           icon="dangerous"
           dense
           size="sm"
-          v-if="v.name !== 'Home'"
-          @click="del()"
+          v-if="i > 0"
+          @click="del(v, i)"
         />
       </q-btn-group>
 

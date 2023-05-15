@@ -26,12 +26,7 @@ export const defStore = defineStore('def', {
     },
     include: [], //需要缓存的页面
     exclude: [], //不需要缓存的页面
-    navMenus: [
-      {
-        label: '首页',
-        name: 'Home'
-      }
-    ],
+    navMenus: [],
     selMenu: [],
     refreshView: true, //刷新当前页面
     resize: {} //监听窗口大小

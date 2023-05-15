@@ -11,19 +11,18 @@ const router = createRouter({
 
 // eslint-disable-next-line no-unused-vars
 router.beforeEach((to, from, next) => {
+  //设置navMenus
+  setNavMenus(to)
+
+  //设置KeepAlive
+  setKeepAlive(to)
   //设置404页面
   if (set404(to, next)) return
 
   next()
 })
 
-router.afterEach((to) => {
-  //设置navMenus
-  setNavMenus(to)
-
-  //设置KeepAlive
-  setKeepAlive(to)
-})
+// router.afterEach((to) => {})
 
 const set404 = (to: any, next: any) => {
   if (!router.hasRoute(to.name)) {
@@ -41,17 +40,20 @@ const set404 = (to: any, next: any) => {
 }
 
 const setNavMenus = (to: any) => {
-  if (!defStore().navMenus.some((r: any) => r.name === to.name) && to.name !== 'Home')
+  if (!defStore().navMenus.some((r: any) => r.name === to.name)) {
+    const { path, name, meta } = to
     defStore().$patch(
       (state: any) =>
         (state.navMenus = [
           ...state.navMenus,
           {
-            label: to.meta.label,
-            name: to.name
+            path,
+            name,
+            meta
           }
         ])
     )
+  }
 }
 
 const setKeepAlive = (to: any) => {
