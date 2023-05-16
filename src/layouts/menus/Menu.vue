@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import MenuItem from './MenuItem.vue'
 
 const props = withDefaults(

@@ -1,10 +1,10 @@
-export default (): any => [
+export const businessRoutes = (): any => [
   {
-    path: '/',
-    name: 'Home',
-    component: '/Home',
+    path: '/control',
+    name: 'Control',
+    component: '/business/Control',
     meta: {
-      label: '首页',
+      label: '控制台',
       icon: 'home',
       keepAlive: false
     }
@@ -12,10 +12,11 @@ export default (): any => [
   {
     path: '/about',
     name: 'About',
-    component: '/About',
+    component: '/business/About',
     meta: {
       label: '关于',
-      icon: 'star'
+      icon: 'star',
+      keepAlive: true
     }
   },
   {
@@ -40,7 +41,7 @@ export default (): any => [
           {
             path: 'menu1-1',
             name: 'Menu11',
-            component: '/sys/Menu11',
+            component: '/business/sys/Menu11',
             meta: {
               label: '菜单1-1',
               icon: 'star'
@@ -53,12 +54,12 @@ export default (): any => [
               label: '菜单1-2',
               icon: 'star'
             },
-            component: '/sys/Menu12',
+            component: '/business/sys/Menu12',
             children: [
               {
                 path: 'menu1-2-1',
                 name: 'Menu121',
-                component: '/sys/Menu121',
+                component: '/business/sys/Menu121',
                 meta: {
                   label: '菜单1-2-1',
                   icon: 'star'
@@ -67,7 +68,7 @@ export default (): any => [
               {
                 path: 'menu1-2-2',
                 name: 'Menu122',
-                component: '/sys/Menu122',
+                component: '/business/sys/Menu122',
                 meta: {
                   label: '菜单1-2-2',
                   icon: 'star'
@@ -124,7 +125,7 @@ export default (): any => [
     },
     children: [
       {
-        path: '/view1',
+        path: 'view1',
         name: 'View1',
         meta: {
           label: '视图1',
@@ -132,7 +133,7 @@ export default (): any => [
         }
       },
       {
-        path: '/view2',
+        path: 'view2',
         name: 'View2',
         meta: {
           label: '视图2',
@@ -144,7 +145,7 @@ export default (): any => [
   {
     path: '/twoPackaging',
     name: 'TwoPackaging',
-    component: '/TwoPackaging',
+    component: '/business/TwoPackaging',
     meta: {
       label: '二次封装',
       icon: 'star'
@@ -153,10 +154,23 @@ export default (): any => [
   {
     path: '/slots',
     name: 'Slots',
-    component: '/Slots',
+    component: '/business/Slots',
     meta: {
       label: '插槽',
       icon: 'star'
     }
   }
+]
+
+export default (): any => [
+  {
+    path: '/',
+    name: 'Main',
+    component: '/Main',
+    meta: {
+      label: 'Main',
+      icon: 'spa'
+    }
+  },
+  ...businessRoutes()
 ]

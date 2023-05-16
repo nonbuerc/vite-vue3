@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { defStore } from '../stores/index'
+import { defStore } from '@/stores/index'
 import { useRoute } from 'vue-router'
-import { Menu, Header, Container, Setting } from './index'
+import { Menu, Header, Container, Setting } from '@/layouts/index'
+import { businessRoutes } from '@/router/routes'
 
 const route = useRoute()
 
@@ -10,12 +11,11 @@ watch(
   () => route.matched,
   (v) => {
     defStore().$patch((state: any) => (state.selMenu = []))
-    v &&
-      v.forEach((r) => {
-        if (r.children?.length > 0) {
-          defStore().$patch((state: any) => (state.selMenu = [...state.selMenu, r.name]))
-        }
-      })
+    v?.forEach((r) => {
+      if (r.children?.length) {
+        defStore().$patch((state: any) => (state.selMenu = [...state.selMenu, r.name]))
+      }
+    })
   }
 )
 const resize = (size: any) => {
@@ -43,7 +43,7 @@ console.log(defStore().config.view)
     >
       <q-scroll-area class="fit inset-shadow">
         <Menu
-          :routes="$router.options.routes"
+          :routes="businessRoutes()"
           :selMenu="defStore().selMenu"
           :mode="'vertical'"
           v-model:mini="mini"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BlankView from '../../layouts/BlankView.vue'
+import { BlankView } from '@/layouts'
 </script>
 <template>
   <div>

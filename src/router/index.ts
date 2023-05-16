@@ -4,6 +4,7 @@ import routes from './routes'
 import { defStore } from '../stores/index'
 
 import { setRoutes } from './set-routes'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [...setRoutes(routes())]

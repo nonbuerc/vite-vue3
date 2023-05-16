@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { defStore } from '@/stores/index'
 
-import { defStore } from '../stores/index'
-
-import { Menu } from './index'
+import { Menu } from '@/layouts/index'
 
 import { useQuasar } from 'quasar'
 const $q = useQuasar()
+
 //主题
 if (!defStore().config.theme) $q.dark.set(true)
-
-// watch(
-//   () => defStore().resize,
-//   (v) => {
-//     console.log(v)
-//   }
-// )
 </script>
 
 <template>
@@ -29,7 +21,7 @@ if (!defStore().config.theme) $q.dark.set(true)
       <q-btn
         v-if="['all', 'left'].includes(defStore().config.menuPosition)"
         @click="
-          defStore().$patch((state: any) => (state.config.drawerMenu = !state.config.drawerMenu))
+          ()=>defStore().$patch((state: any) => (state.config.drawerMenu = !state.config.drawerMenu))
         "
         round
         dense
@@ -37,7 +29,7 @@ if (!defStore().config.theme) $q.dark.set(true)
         glossy
       />
 
-      <q-btn round class="q-ml-md" glossy>
+      <q-btn round class="q-ml-md" glossy :to="{ name: $router.options.routes[0].name }">
         <q-avatar>
           <q-img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
         </q-avatar>
@@ -61,7 +53,7 @@ if (!defStore().config.theme) $q.dark.set(true)
         "
       >
         <Menu
-          :routes="$router.options.routes"
+          :routes="$router.options.routes[0].children"
           :selMenu="defStore().selMenu"
           mode="horizontal"
         ></Menu>

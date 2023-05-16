@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Slots from '../components/Slots.vue'
+import Slots from '@/components/Slots.vue'
 </script>
 <template>
   <Slots>

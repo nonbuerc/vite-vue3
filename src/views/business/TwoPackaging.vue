@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import TwoPackagingComponents from '../components/TwoPackagingComponents.vue'
+import TwoPackagingComponents from '@/components/TwoPackagingComponents.vue'
 const onMainClick = (e: any) => {
   console.log('Clicked on main button', e)
 }

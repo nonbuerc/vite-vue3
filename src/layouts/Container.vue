@@ -7,7 +7,9 @@ import { defStore } from '../stores/index'
   <q-page-container>
     <q-page
       class="row q-pa-sm"
-      :class="{ 'inset-shadow': !['none'].includes(defStore().config.menuPosition) }"
+      :class="{
+        'inset-shadow': !['none'].includes(defStore().config.menuPosition)
+      }"
     >
       <div class="col-12">
         <div class="column full-height">
@@ -15,9 +17,16 @@ import { defStore } from '../stores/index'
           <Breadcrumbs />
           <div
             class="col full-height q-px-sm q-pt-sm"
-            :class="{ 'inset-shadow': !['none'].includes(defStore().config.menuPosition) }"
+            :class="{
+              'inset-shadow': !['none'].includes(defStore().config.menuPosition)
+            }"
           >
-            <q-spinner-bars color="primary" size="xl" class="absolute-center" v-if="false" />
+            <q-spinner-bars
+              color="primary"
+              size="xl"
+              class="absolute-center"
+              v-if="false"
+            />
             <q-scroll-area
               class="fit"
               :content-style="{ height: '100%' }"

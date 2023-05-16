@@ -1,27 +1,20 @@
 // import { defineAsyncComponent } from 'vue'
 const modules = import.meta.glob('../views/**/**/*.vue')
+console.log(modules)
 
 const setRoute = (route: any) => {
-  route = {
-    ...route,
-    meta: {
-      //缓存  //默认false
-      keepAlive: false,
-      ...route.meta
-    }
-  }
-  if (route.children) {
+  if (route.children?.length) {
     route = {
+      redirect: {
+        name: route.children[0]?.name
+      },
       ...route,
       component: route?.component
         ? modules[`../views${route?.component}.vue`]
-        : () => import('../layouts/BlankView.vue'),
-      redirect: {
-        name: route.children[0]?.name
-      }
+        : () => import('../layouts/BlankView.vue')
     }
   }
-  if (!route.children) {
+  if (!route.children?.length) {
     //开发中
     route = {
       ...route,
@@ -35,7 +28,7 @@ const setRoute = (route: any) => {
 export const setRoutes = (routes = []) => {
   return routes.map((r: any) => {
     r = setRoute(r)
-    if (r.children) {
+    if (r.children?.length) {
       r.children = [...setRoutes(r.children)]
     }
     return r
