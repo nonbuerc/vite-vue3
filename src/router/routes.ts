@@ -1,8 +1,8 @@
-export const businessRoutes = (): any => [
+export const businessRoutes = (path: string): any => [
   {
     path: '/control',
     name: 'Control',
-    component: '/business/Control',
+    component: `${path}/Control`,
     meta: {
       label: '控制台',
       icon: 'home',
@@ -12,7 +12,7 @@ export const businessRoutes = (): any => [
   {
     path: '/about',
     name: 'About',
-    component: '/business/About',
+    component: `${path}/About`,
     meta: {
       label: '关于',
       icon: 'star',
@@ -41,7 +41,7 @@ export const businessRoutes = (): any => [
           {
             path: 'menu1-1',
             name: 'Menu11',
-            component: '/business/sys/Menu11',
+            component: `${path}/sys/Menu11`,
             meta: {
               label: '菜单1-1',
               icon: 'star'
@@ -54,12 +54,12 @@ export const businessRoutes = (): any => [
               label: '菜单1-2',
               icon: 'star'
             },
-            component: '/business/sys/Menu12',
+            component: `${path}/sys/Menu12`,
             children: [
               {
                 path: 'menu1-2-1',
                 name: 'Menu121',
-                component: '/business/sys/Menu121',
+                component: `${path}/sys/Menu121`,
                 meta: {
                   label: '菜单1-2-1',
                   icon: 'star'
@@ -68,7 +68,7 @@ export const businessRoutes = (): any => [
               {
                 path: 'menu1-2-2',
                 name: 'Menu122',
-                component: '/business/sys/Menu122',
+                component: `${path}/sys/Menu122`,
                 meta: {
                   label: '菜单1-2-2',
                   icon: 'star'
@@ -145,7 +145,7 @@ export const businessRoutes = (): any => [
   {
     path: '/twoPackaging',
     name: 'TwoPackaging',
-    component: '/business/TwoPackaging',
+    component: `${path}/TwoPackaging`,
     meta: {
       label: '二次封装',
       icon: 'star'
@@ -154,7 +154,7 @@ export const businessRoutes = (): any => [
   {
     path: '/slots',
     name: 'Slots',
-    component: '/business/Slots',
+    component: `${path}/Slots`,
     meta: {
       label: '插槽',
       icon: 'star'
@@ -162,15 +162,78 @@ export const businessRoutes = (): any => [
   }
 ]
 
+export const dataRoutes = (path: string): any => [
+  {
+    path: '/user',
+    name: 'User',
+    component: `${path}/user`,
+    meta: {
+      label: '用户列表',
+      icon: 'home'
+    }
+  }
+]
+export const systemRoutes = (path: string): any => [
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: `${path}/setting`,
+    meta: {
+      label: '系统设置',
+      icon: 'home'
+    }
+  }
+]
+export const mainRoutes = (path: string): any => [
+  {
+    path: '/setting',
+    name: 'Setting',
+    component: `${path}/setting`,
+    meta: {
+      label: '系统设置',
+      icon: 'home'
+    }
+  }
+]
+
 export default (): any => [
   {
     path: '/',
-    name: 'Main',
+    name: 'Business',
+    component: '/Main',
+    meta: {
+      label: 'Main',
+      icon: 'account_balance'
+    },
+    redirect: {
+      name: 'Control'
+    },
+    children: [...businessRoutes('/business')]
+  },
+  {
+    path: '/data',
+    name: 'Data',
+    component: '/Main',
+    meta: {
+      label: 'Main',
+      icon: 'dashboard'
+    },
+    redirect: {
+      name: 'Control'
+    },
+    children: [...dataRoutes('/data')]
+  },
+  {
+    path: '/system',
+    name: 'System',
     component: '/Main',
     meta: {
       label: 'Main',
       icon: 'spa'
-    }
-  },
-  ...businessRoutes()
+    },
+    redirect: {
+      name: 'Control'
+    },
+    children: [...systemRoutes('/system')]
+  }
 ]

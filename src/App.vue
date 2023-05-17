@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { Index } from '@/layouts'
-</script>
+<script setup lang="ts"></script>
 <template>
-  <Index />
+  <router-view />
 </template>

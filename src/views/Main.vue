@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Index } from '@/layouts'
+</script>
 <template>
-  <div></div>
+  <Index />
 </template>
