@@ -1,4 +1,4 @@
-export const businessRoutes = (path: string): any => [
+export const businessRoutes = (path: string = '/business'): any => [
   {
     path: '/control',
     name: 'Control',
@@ -162,7 +162,7 @@ export const businessRoutes = (path: string): any => [
   }
 ]
 
-export const dataRoutes = (path: string): any => [
+export const dataRoutes = (path: string = '/data'): any => [
   {
     path: '/user',
     name: 'User',
@@ -173,7 +173,7 @@ export const dataRoutes = (path: string): any => [
     }
   }
 ]
-export const systemRoutes = (path: string): any => [
+export const systemRoutes = (path: string = '/system'): any => [
   {
     path: '/setting',
     name: 'Setting',
@@ -184,7 +184,7 @@ export const systemRoutes = (path: string): any => [
     }
   }
 ]
-export const mainRoutes = (path: string): any => [
+export const mainRoutes = (path: string = '/system'): any => [
   {
     path: '/setting',
     name: 'Setting',
@@ -208,7 +208,7 @@ export default (): any => [
     redirect: {
       name: 'Control'
     },
-    children: [...businessRoutes('/business')]
+    children: [...businessRoutes()]
   },
   {
     path: '/data',
@@ -221,7 +221,7 @@ export default (): any => [
     redirect: {
       name: 'Control'
     },
-    children: [...dataRoutes('/data')]
+    children: [...dataRoutes()]
   },
   {
     path: '/system',
@@ -234,6 +234,6 @@ export default (): any => [
     redirect: {
       name: 'Control'
     },
-    children: [...systemRoutes('/system')]
+    children: [...systemRoutes()]
   }
 ]
