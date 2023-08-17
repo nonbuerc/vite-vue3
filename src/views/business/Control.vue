@@ -12,9 +12,9 @@ const onMerge = async () => {
   // img1Obj.src = await getImageUrl('http://192.168.0.165:3690/src/assets/1.jpg')
   // img2Obj.src = await getImageUrl('http://192.168.0.165:3690/src/assets/logo.png')
   dataUrl.value = await useMergePic({
-    img1: 'http://cid-test.jiuwei.cloud:88/cid/image/20230523/3847a21135814280a1c95264abe7b705.jpg',
+    img1: 'https://pic4.zhimg.com/v2-76f454cdbfe8804a95c245c3f844da27_b.jpg',
     obj: {
-      src: 'http://cid-test.jiuwei.cloud:88/cid/image/20230510/4fc6b49ddc58a5fa052cfb7aa7756700.png',
+      src: 'https://pic2.zhimg.com/v2-e87cea2b32ea4c180471d17bfae5c725_b.jpg',
       x: 130,
       y: 130,
       width: 80,
